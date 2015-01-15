@@ -21,6 +21,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "g_local.h"
 
+#ifdef WIN32
+#include <direct.h>
+#else
+#include <sys/stat.h>
+#include <unistd.h>
+#endif
+
 void InitiallyDead (edict_t *self);
 
 // Lazarus: If worldspawn CORPSE_SINK effects flag is set,

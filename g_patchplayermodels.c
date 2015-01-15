@@ -31,6 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifdef WIN32
 #include <direct.h>
 #else
+#include <sys/stat.h>
 #include <unistd.h>
 #endif
 #include "g_local.h"
