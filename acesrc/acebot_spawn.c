@@ -530,7 +530,7 @@ void ACESP_SetName(edict_t *bot, char *name, char *skin, char *team)
 			for (i = r; i < num_botinfo; i++)
 				if (!bot_info[i].ingame_count)
 				{
-					sprintf(bot_name, bot_info[i].name);
+					sprintf(bot_name, "%s", bot_info[i].name);
 					bot_info[i].ingame_count++;
 					break;
 				}
@@ -539,7 +539,7 @@ void ACESP_SetName(edict_t *bot, char *name, char *skin, char *team)
 				for (i = 0; i < r; i++)
 					if (!bot_info[i].ingame_count)
 					{
-						sprintf(bot_name, bot_info[i].name);
+						sprintf(bot_name, "%s", bot_info[i].name);
 						bot_info[i].ingame_count++;
 						break;
 					}
@@ -559,8 +559,8 @@ void ACESP_SetName(edict_t *bot, char *name, char *skin, char *team)
 		for (i = 0; i < num_botinfo; i++)
 			if (!Q_stricmp(bot_name, bot_info[i].name))
 			{
-				sprintf(bot_name, bot_info[i].name); // fix capitalization
-				sprintf(bot_skin, bot_info[i].skin);
+				sprintf(bot_name, "%s", bot_info[i].name); // fix capitalization
+				sprintf(bot_skin, "%s", bot_info[i].skin);
 				bot_info[i].ingame_count++;
 				break;
 			}
@@ -570,7 +570,7 @@ void ACESP_SetName(edict_t *bot, char *name, char *skin, char *team)
 				for (i = 0; i < NUM_BOT_SKINS; i++)
 					if (rnd < ((float)(i+1)/(float)NUM_BOT_SKINS) )
 					{	r=i; break; }
-				sprintf(bot_skin, skinnames[r]);
+				sprintf(bot_skin, "%s", skinnames[r]);
 			}
 	}
 	else
