@@ -2815,7 +2815,7 @@ void target_attractor_think(edict_t *self)
 	ent_start = 1;
 	while(true)
 	{
-		if(self->spawnflags & (ATTRACTOR_PLAYER || ATTRACTOR_MONSTER))
+		if(self->spawnflags & (ATTRACTOR_PLAYER | ATTRACTOR_MONSTER))
 		{
 			target = NULL;
 			for(i=ent_start, ent=&g_edicts[ent_start];i<globals.num_edicts && !target; i++, ent++)
