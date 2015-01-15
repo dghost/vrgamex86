@@ -800,12 +800,14 @@ edict_t *SelectCTFSpawnPoint (edict_t *ent)
 	float	range, range1, range2;
 	char	*cname;
 
-	if (ent->client->resp.ctf_state)
-		if ( (int)(dmflags->value) & DF_SPAWN_FARTHEST)
+    if (ent->client->resp.ctf_state) {
+        if ( (int)(dmflags->value) & DF_SPAWN_FARTHEST) {
 			return SelectFarthestDeathmatchSpawnPoint ();
-		else
+        } else {
 			return SelectRandomDeathmatchSpawnPoint ();
-
+        }
+    }
+    
 	ent->client->resp.ctf_state++;
 
 	switch (ent->client->resp.ctf_team) {
@@ -1061,7 +1063,9 @@ void CTFCheckHurtCarrier(edict_t *targ, edict_t *attacker)
 	else if (targ->client->resp.ctf_team == CTF_TEAM3) {
 		flag_item1 = flag1_item;
 		flag_item2 = flag2_item;
-	}
+    } else {
+        return;
+    }
 
 	if ( ( targ->client->pers.inventory[ITEM_INDEX(flag_item1)]
 		 || targ->client->pers.inventory[ITEM_INDEX(flag_item2)] ) // Knightmare added
