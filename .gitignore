@@ -219,3 +219,11 @@ pip-log.txt
 *.exe
 
 external/
+vrgamex86.so
+
+#cmake crap
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt
