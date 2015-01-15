@@ -2763,7 +2763,7 @@ void ClientSpycam(edict_t *ent)
 				}
 				else if(is_actor)
 				{
-					int	weapon = camera->actor_weapon[camera->actor_current_weapon];
+//					int	weapon = camera->actor_weapon[camera->actor_current_weapon];
 					if(!camera->enemy)
 					{
 						edict_t	*target;

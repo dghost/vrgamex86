@@ -1422,7 +1422,7 @@ edict_t *NextPathTrack(edict_t *train, edict_t *path)
 
 void LookAhead( edict_t *train, vec3_t point, float dist )
 {
-	float originalDist = dist;
+//	float originalDist = dist;
 	float length;
 	vec3_t	v;
 	edict_t	*path;

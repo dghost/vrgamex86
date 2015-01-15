@@ -495,8 +495,8 @@ A generic function to handle the basics of weapon thinking
 void Weapon_Generic2 (edict_t *ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST, int FRAME_IDLE_LAST, int FRAME_DEACTIVATE_LAST, int *pause_frames, int *fire_frames, void (*fire)(edict_t *ent, qboolean altfire))
 {
 	int		n;
-	int oldstate = ent->client->weaponstate;
-	qboolean haste_applied = false;
+//	int oldstate = ent->client->weaponstate;
+//	qboolean haste_applied = false;
 
 	if(ent->deadflag || ent->s.modelindex != MAX_MODELS-1) // VWep animations screw up corpses
 	{
