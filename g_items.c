@@ -2848,7 +2848,7 @@ tank commander's head
 		"item_flag_team1",
 		CTFPickup_Flag,
 		NULL,
-		CTFDrop_Flag, //Should this be null if we don't want players to drop it manually?
+        (void (*)(edict_t *, gitem_t *))CTFDrop_Flag, //Should this be null if we don't want players to drop it manually?
 		NULL,
 		"ctf/flagtk.wav",
 		"players/male/flag1.md2", 0, EF_FLAG1,
@@ -2871,7 +2871,7 @@ tank commander's head
 		"item_flag_team2",
 		CTFPickup_Flag,
 		NULL,
-		CTFDrop_Flag, //Should this be null if we don't want players to drop it manually?
+		(void (*)(edict_t *, gitem_t *))CTFDrop_Flag, //Should this be null if we don't want players to drop it manually?
 		NULL,
 		"ctf/flagtk.wav",
 		"players/male/flag2.md2", 0, EF_FLAG2,
@@ -2895,7 +2895,7 @@ tank commander's head
 		"item_flag_team3",
 		CTFPickup_Flag,
 		NULL,
-		CTFDrop_Flag, //Should this be null if we don't want players to drop it manually?
+		(void (*)(edict_t *, gitem_t *))CTFDrop_Flag, //Should this be null if we don't want players to drop it manually?
 		NULL,
 		"ctf/flagtk.wav",
 #ifdef KMQUAKE2_ENGINE_MOD
