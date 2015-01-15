@@ -509,7 +509,7 @@ void ACESP_SetName(edict_t *bot, char *name, char *skin, char *team)
 	char userinfo[MAX_INFO_STRING] = "";
 	char bot_skin[MAX_INFO_STRING] = "";
 	char bot_name[MAX_INFO_STRING] = "";
-	int i, r;
+	int i, r = 0;
 
 	if (NUM_BOT_SKINS == 0)
 		NUM_BOT_SKINS = listSize(skinnames);

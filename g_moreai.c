@@ -411,7 +411,7 @@ A monster has touched a hint_path node
 void touch_hint_path (edict_t *hintpath, edict_t *monster, cplane_t *plane, csurface_t *surf)
 {
 	qboolean	parsedGoal = false;
-	edict_t		*ent, *goalPath, *nextPath;
+	edict_t		*ent, *goalPath, *nextPath = NULL;
 
 	if (monster->monsterinfo.aiflags & AI_MEDIC_PATROL) 
 	{

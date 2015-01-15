@@ -562,7 +562,7 @@ void tracktrain_hide (edict_t *self)
 
 void tracktrain_think (edict_t *self)
 {
-	float	distance, speed, time;
+	float	distance, speed, time = 0.0;
 	float	yaw, pitch;
 	vec3_t	forward, left, up, f1, l1, u1, v;
 	int		i;
