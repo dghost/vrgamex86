@@ -2415,7 +2415,7 @@ trace_t	PM_trace (vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end)
 		return gi.trace (start, mins, maxs, end, pm_passent, MASK_DEADSOLID);
 }
 
-unsigned CheckBlock (void *b, int c)
+uint32_t CheckBlock (void *b, int c)
 {
 	int	v,i;
 	v = 0;
@@ -2425,7 +2425,7 @@ unsigned CheckBlock (void *b, int c)
 }
 void PrintPmove (pmove_t *pm)
 {
-	unsigned	c1, c2;
+	uint32_t	c1, c2;
 
 	c1 = CheckBlock (&pm->s, sizeof(pm->s));
 	c2 = CheckBlock (&pm->cmd, sizeof(pm->cmd));
@@ -3233,7 +3233,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 
 						gravity = g_max * (level.framenum - client->jetpack_last_thrust)/20;
 						if(gravity > g_max) gravity = g_max;
-						client->ps.pmove.gravity = (short)gravity;
+						client->ps.pmove.gravity = (int16_t)gravity;
 					}
 					else
 						client->jetpack_last_thrust = level.framenum;

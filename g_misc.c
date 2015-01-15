@@ -2933,8 +2933,8 @@ static void func_clock_reset (edict_t *self)
 // Skuller's hack to fix crash on exiting biggun
 typedef struct zhead_s {
    struct zhead_s   *prev, *next;
-   short   magic;
-   short   tag;         // for group free
+   int16_t   magic;
+   int16_t   tag;         // for group free
    int      size;
 } zhead_t;
 

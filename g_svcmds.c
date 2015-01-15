@@ -60,8 +60,8 @@ If 0, then only addresses matching the list will be allowed.  This lets you easi
 
 typedef struct
 {
-	unsigned	mask;
-	unsigned	compare;
+	uint32_t	mask;
+	uint32_t	compare;
 } ipfilter_t;
 
 #define	MAX_IPFILTERS	1024
@@ -110,8 +110,8 @@ static qboolean StringToFilter (char *s, ipfilter_t *f)
 		s++;
 	}
 	
-	f->mask = *(unsigned *)m;
-	f->compare = *(unsigned *)b;
+	f->mask = *(uint32_t *)m;
+	f->compare = *(uint32_t *)b;
 	
 	return true;
 }
@@ -124,7 +124,7 @@ SV_FilterPacket
 qboolean SV_FilterPacket (char *from)
 {
 	int		i;
-	unsigned	in;
+	uint32_t	in;
 	byte m[4];
 	char *p;
 
@@ -141,7 +141,7 @@ qboolean SV_FilterPacket (char *from)
 		i++, p++;
 	}
 	
-	in = *(unsigned *)m;
+	in = *(uint32_t *)m;
 
 	for (i=0 ; i<numipfilters ; i++)
 		if ( (in & ipfilters[i].mask) == ipfilters[i].compare)
@@ -226,7 +226,7 @@ void SVCmd_ListIP_f (void)
 	safe_cprintf (NULL, PRINT_HIGH, "Filter list:\n");
 	for (i=0 ; i<numipfilters ; i++)
 	{
-		*(unsigned *)b = ipfilters[i].compare;
+		*(uint32_t *)b = ipfilters[i].compare;
 		safe_cprintf (NULL, PRINT_HIGH, "%3i.%3i.%3i.%3i\n", b[0], b[1], b[2], b[3]);
 	}
 }
@@ -264,7 +264,7 @@ void SVCmd_WriteIP_f (void)
 
 	for (i=0 ; i<numipfilters ; i++)
 	{
-		*(unsigned *)b = ipfilters[i].compare;
+		*(uint32_t *)b = ipfilters[i].compare;
 		fprintf (f, "sv addip %i.%i.%i.%i\n", b[0], b[1], b[2], b[3]);
 	}
 	

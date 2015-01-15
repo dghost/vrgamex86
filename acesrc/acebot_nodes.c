@@ -96,7 +96,7 @@ int show_path_to = -1;
 
 // array for node data
 node_t nodes[MAX_NODES]; 
-short int path_table[MAX_NODES][MAX_NODES];
+int16_t path_table[MAX_NODES][MAX_NODES];
 
 ///////////////////////////////////////////////////////////////////////
 // NODE INFORMATION FUNCTIONS
@@ -483,7 +483,7 @@ void ACEND_InitNodes(void)
 	numnodes = 1;
 	numitemnodes = 1;
 	memset(nodes,0,sizeof(node_t) * MAX_NODES);
-	memset(path_table,INVALID,sizeof(short int)*MAX_NODES*MAX_NODES);
+	memset(path_table,INVALID,sizeof(int16_t)*MAX_NODES*MAX_NODES);
 			
 }
 
@@ -782,7 +782,7 @@ void ACEND_SaveNodes()
 	
 	for(i=0;i<numnodes;i++)
 		for(j=0;j<numnodes;j++)
-			fwrite(&path_table[i][j],sizeof(short int),1,pOut); // write count
+			fwrite(&path_table[i][j],sizeof(int16_t),1,pOut); // write count
 		
 	fwrite(item_table,sizeof(item_table_t),num_items,pOut); 		// write out the fact table
 
@@ -833,7 +833,7 @@ void ACEND_LoadNodes(void)
 
 		for(i=0;i<numnodes;i++)
 			for(j=0;j<numnodes;j++)
-				fread(&path_table[i][j],sizeof(short int),1,pIn); // write count
+				fread(&path_table[i][j],sizeof(int16_t),1,pIn); // write count
 	
 		// Knightmare- is this needed?  It's all re-built anyway, and may cause problems.
 		// The item_table array is better left blank.

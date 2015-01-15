@@ -47,11 +47,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 						   if match_length is greater than this */
 #define NIL			N	/* index for root of binary search trees */
 
-unsigned long int
+uint32_t
 		textsize = 0,	/* text size counter */
 		codesize = 0,	/* code size counter */
 		printcount = 0;	/* counter for reporting progress every 1K bytes */
-unsigned char
+uint8_t
 		text_buf[N + F - 1];	/* ring buffer of size N,
 			with extra F-1 bytes to facilitate string comparison */
 int		match_position, match_length,  /* of longest match.  These are
@@ -84,7 +84,7 @@ void InsertNode(int r)
 	   Note r plays double role, as tree node and position in buffer. */
 {
 	int  i, p, cmp;
-	unsigned char  *key;
+	uint8_t  *key;
 
 	cmp = 1;  key = &text_buf[r];  p = N + 1 + key[0];
 	rson[r] = lson[r] = NIL;  match_length = 0;
@@ -131,10 +131,10 @@ void DeleteNode(int p)  /* deletes node p from tree */
 	dad[p] = NIL;
 }
 
-int Encode(char *filename, unsigned char *buffer, int bufsize, int version)
+int Encode(char *filename, uint8_t *buffer, int bufsize, int version)
 {
 	int  i, c, len, r, s, last_match_length, code_buf_ptr;
-	unsigned char  code_buf[17], mask;
+	uint8_t  code_buf[17], mask;
 	int bufptr = 0;
 	FILE *pOut;
 	//int version;
@@ -179,8 +179,8 @@ int Encode(char *filename, unsigned char *buffer, int bufsize, int version)
 			code_buf[0] |= mask;  /* 'send one byte' flag */
 			code_buf[code_buf_ptr++] = text_buf[r];  /* Send uncoded. */
 		} else {
-			code_buf[code_buf_ptr++] = (unsigned char) match_position;
-			code_buf[code_buf_ptr++] = (unsigned char)
+			code_buf[code_buf_ptr++] = (uint8_t) match_position;
+			code_buf[code_buf_ptr++] = (uint8_t)
 				(((match_position >> 4) & 0xf0)
 			  | (match_length - (THRESHOLD + 1)));  /* Send position and
 					length pair. Note match_length > THRESHOLD. */
@@ -230,10 +230,10 @@ int Encode(char *filename, unsigned char *buffer, int bufsize, int version)
 }
 
 // Be careful with your buffersize, will return an exit of -1 if failure
-int Decode(char *filename, unsigned char *buffer, int bufsize)	/* Just the reverse of Encode(). */
+int Decode(char *filename, uint8_t *buffer, int bufsize)	/* Just the reverse of Encode(). */
 {
 	int  i, j, k, r, c;
-	unsigned int  flags;
+	uint32_t  flags;
 	int bufptr=0;
 	FILE *pIn;
 	int version;
@@ -284,12 +284,12 @@ int Decode(char *filename, unsigned char *buffer, int bufsize)	/* Just the rever
 int main(int argc, char *argv[])
 {
 	//char  *s;
-	unsigned char i;
+	uint8_t i;
 	int csize,ucsize;
-	unsigned char *buffer1;
+	uint8_t *buffer1;
 	int bufsize = 20000;
 	
-	buffer1 = (unsigned char *)malloc(bufsize);
+	buffer1 = (uint8_t *)malloc(bufsize);
 
 	buffer1[500] = 'c';
 	buffer1[785] = 's';

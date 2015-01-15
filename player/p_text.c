@@ -54,7 +54,7 @@ void Text_Close(edict_t *ent)
 void Text_BuildDisplay(texthnd_t *hnd)
 {
 	int i, imax, n;
-	char *p1, *p2, *p3;
+	byte *p1, *p2, *p3;
 
 	for(i=0; i<hnd->page_length+2; i++)
 		text[i].text = NULL;
@@ -81,7 +81,7 @@ void Text_BuildDisplay(texthnd_t *hnd)
 
 	i = 0;
 	p2 = p1;
-	text[i].text = p2;
+	text[i].text = (char *) p2;
 	if(hnd->nlines > hnd->page_length)
 		imax = hnd->page_length-2;
 	else
@@ -92,7 +92,7 @@ void Text_BuildDisplay(texthnd_t *hnd)
 		{
 			i++;
 			p2++;
-			text[i].text = p2;
+			text[i].text = (char *)p2;
 		}
 		else
 			p2++;
@@ -243,10 +243,10 @@ void Text_Prev(edict_t *ent)
 void Do_Text_Display(edict_t *activator, int flags, char *message)
 {
 	int			/*i,*/ L;
-	char		*p1, *p2, *p3;
+	byte		*p1, *p2, *p3;
 	char		sound[64];
 	texthnd_t	*hnd;
-	char		*temp_buffer;
+	byte		*temp_buffer;
 	int			line_length;
 	int			new_line_length;
 	qboolean	alt, centered, right_justified;
@@ -394,7 +394,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 		memcpy(hnd->buffer,message,L);
 	}
 	
-	hnd->size = strlen(hnd->buffer) + 1;
+	hnd->size = strlen((char *)hnd->buffer) + 1;
 
 	// Default page length:
 	hnd->page_length = MAX_LINES-2;
@@ -408,27 +408,27 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 	if(*p1 == '$')
 	{
 		p3 = p1;
-		while((p3 < (char*)hnd->buffer+hnd->size) && (*p3 != 13))
+		while((p3 < hnd->buffer+hnd->size) && (*p3 != 13))
 			p3++;
 
-		p2 = strstr(p1,"L=");
+		p2 = (byte *)strstr((char *)p1,"L=");
 		if(p2 && (p2 < p3))
 		{
 			p2 += 2;
-			sscanf(p2,"%d",&hnd->page_length);
+			sscanf((char *)p2,"%d",&hnd->page_length);
 			hnd->page_length += 1;
 		}
-		p2 = strstr(p1,"W=");
+		p2 = (byte *) strstr((char *)p1,"W=");
 		if(p2 && (p2 < p3))
 		{
 			p2 += 2;
-			sscanf(p2,"%d",&hnd->page_width);
+			sscanf((char *)p2,"%d",&hnd->page_width);
 		}
-		p2 = strstr(p1,"I=");
+		p2 = (byte *)strstr((char *)p1,"I=");
 		if(p2 && (p2 < p3))
 		{
 			p2 += 2;
-			sscanf(p2,"%s",hnd->background_image);
+			sscanf((char *)p2,"%s",hnd->background_image);
 		}
 		p3++;
 		if(*p3 == 10) p3++;
@@ -438,11 +438,11 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 
 	// Eliminate all <CR>'s so lines are delineated with <LF>'s only
 	p1 = hnd->buffer+hnd->start_char;
-	while(p1 < (char*)hnd->buffer+hnd->size)
+	while(p1 < hnd->buffer+hnd->size)
 	{
 		if(*p1 == 13)
 		{
-			for(p2=p1, p3=p1+1; p2<(char*)hnd->buffer+hnd->size; p2++, p3++)
+			for(p2=p1, p3=p1+1; p2<hnd->buffer+hnd->size; p2++, p3++)
 				*p2 = *p3;
 			hnd->size--;
 		}
@@ -451,7 +451,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 	}
 	// Count number of lines and replace all line feeds with 0's
 	hnd->nlines = 1;
-	for(p1 = hnd->buffer+hnd->start_char; p1 < (char*)hnd->buffer+hnd->size; p1++)
+	for(p1 = hnd->buffer+hnd->start_char; p1 < hnd->buffer+hnd->size; p1++)
 	{
 		if(*p1 == 10)
 		{
@@ -468,7 +468,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 	alt = false;
 	centered = false;
 	right_justified = false;
-	while(p1 < (char*)hnd->buffer+hnd->size)
+	while(p1 < hnd->buffer+hnd->size)
 	{
 		// Don't count control characters
 		if(line_length == 0) {
@@ -515,7 +515,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 				// back up from current position to last space character and
 				// replace with a 0 (but don't go past previous 0)
 				p2 = p1;
-				while(p1 > (char*)hnd->buffer+hnd->start_char && *p1 != 0)
+				while(p1 > hnd->buffer+hnd->start_char && *p1 != 0)
 				{
 					if(*p1 == 32)
 					{
@@ -634,7 +634,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			if(*p2=='n') {
 				*p1 = 0;
 				p3 = p2 + 1;
-				while(p3 < (char*)hnd->buffer + hnd->size) {
+				while(p3 < hnd->buffer + hnd->size) {
 					*p2 = *p3;
 					p2++;
 					p3++;
@@ -647,7 +647,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			}
 		}
 		// If we're at a 0, check to see if subsequent words will fit on this line
-		if((!linebreak) && (*p1 == 0) && (p1 < (char*)hnd->buffer+hnd->size-1) &&
+		if((!linebreak) && (*p1 == 0) && (p1 < hnd->buffer+hnd->size-1) &&
 			(line_length < hnd->page_width) )
 		{
 			// Don't do this if 2 consecutive 0's are found (end of paragraph)
@@ -658,10 +658,10 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			{
 				p2++;
 				p2++;
-				if(*p2 != 0 && *p2 != '*' && *p2 != '\\' && p2 < (char*)hnd->buffer+hnd->size)
+				if(*p2 != 0 && *p2 != '*' && *p2 != '\\' && p2 < hnd->buffer+hnd->size)
 				{
 					new_line_length = line_length+2;
-					while(p2 < (char*)hnd->buffer+hnd->size && *p2 != 32 && *p2 != 0)
+					while(p2 < hnd->buffer+hnd->size && *p2 != 32 && *p2 != 0)
 					{
 						new_line_length++;
 						p2++;
@@ -684,9 +684,9 @@ done_linebreaks:
 	// Finally, scan for a \a code (embedded audio). If present remove that line
 	// and play the sound
 	p1 = hnd->buffer+hnd->start_char;
-	while(p1 < (char*)hnd->buffer+hnd->size)
+	while(p1 < hnd->buffer+hnd->size)
 	{
-		if((*p1 == 0) || (p1 == (char*)hnd->buffer+hnd->start_char))
+		if((*p1 == 0) || (p1 == hnd->buffer+hnd->start_char))
 		{
 			if(*p1 == 0)
 				p1++;
@@ -695,13 +695,13 @@ done_linebreaks:
 				p1++;
 				if(*p1 == 'a')
 				{
-					strcpy(sound,p1+1);
+					strcpy(sound,(char *)p1+1);
 					p1--;
 					p2=p1;
 					while(*p2 != 0)
 						p2++;
 					p2++;
-					memcpy(p1,p2,hnd->size + ((char*)hnd->buffer - p2) + 1);
+					memcpy(p1,p2,hnd->size + (hnd->buffer - p2) + 1);
 					hnd->nlines--;
 					// Found one (only one is allowed)
 					gi.sound (activator, CHAN_AUTO, gi.soundindex (sound), 1, ATTN_NORM, 0);
