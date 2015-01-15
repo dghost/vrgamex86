@@ -377,22 +377,22 @@ float ACEIT_ItemNeed(edict_t *self, int item)
 
 		case ITEMLIST_FLAG1:
 			// If I am on team one or three, I want team two's flag
-			if(!self->client->pers.inventory[item]
-				&& self->client->resp.ctf_team == CTF_TEAM2 || self->client->resp.ctf_team == CTF_TEAM3)
+			if((!self->client->pers.inventory[item]
+				&& self->client->resp.ctf_team == CTF_TEAM2) || self->client->resp.ctf_team == CTF_TEAM3)
 				return 10.0;  
 			else 
 				return 0.0;
 
 		case ITEMLIST_FLAG2:
-			if(!self->client->pers.inventory[item]
-				&& self->client->resp.ctf_team == CTF_TEAM1 || self->client->resp.ctf_team == CTF_TEAM3)
+			if((!self->client->pers.inventory[item]
+				&& self->client->resp.ctf_team == CTF_TEAM1) || self->client->resp.ctf_team == CTF_TEAM3)
 				return 10.0;  
 			else
 				return 0.0;
 
 		case ITEMLIST_FLAG3:
-			if(!self->client->pers.inventory[item]
-				&& self->client->resp.ctf_team == CTF_TEAM1 || self->client->resp.ctf_team == CTF_TEAM2)
+			if((!self->client->pers.inventory[item]
+				&& self->client->resp.ctf_team == CTF_TEAM1) || self->client->resp.ctf_team == CTF_TEAM2)
 				return 10.0;  
 			else
 				return 0.0;

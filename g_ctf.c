@@ -4161,23 +4161,23 @@ void CTFEndMatch(void)
 
 		if (ctfgame.team1 > ctfgame.team2 && ctfgame.team1 > ctfgame.team3)
 			safe_bprintf(PRINT_CHAT, "RED team won over the BLUE and GREEN teams by %d CAPTURES!\n",
-				ctfgame.team1 - (ctfgame.team2 > ctfgame.team3)? ctfgame.team2:ctfgame.team3);
+				(ctfgame.team1 - (ctfgame.team2 > ctfgame.team3))? ctfgame.team2:ctfgame.team3);
 		else if (ctfgame.team2 > ctfgame.team1 && ctfgame.team2 > ctfgame.team3)
 			safe_bprintf(PRINT_CHAT, "BLUE team won over the RED and GREEN teams by %d CAPTURES!\n",
-				ctfgame.team2 - (ctfgame.team1 > ctfgame.team3)? ctfgame.team1:ctfgame.team3);
+				(ctfgame.team2 - (ctfgame.team1 > ctfgame.team3))? ctfgame.team1:ctfgame.team3);
 		else if (ctfgame.team3 > ctfgame.team1 && ctfgame.team3 > ctfgame.team2)
 			safe_bprintf(PRINT_CHAT, "GREEN team won over the RED and BLUE teams by %d CAPTURES!\n",
-				ctfgame.team3 - (ctfgame.team1 > ctfgame.team2)? ctfgame.team1:ctfgame.team2);
+				(ctfgame.team3 - (ctfgame.team1 > ctfgame.team2))? ctfgame.team1:ctfgame.team2);
 		// frag tie breaker
 		else if (ctfgame.total1 > ctfgame.total2 && ctfgame.total1 > ctfgame.total3) 
 			safe_bprintf(PRINT_CHAT, "RED team won over the BLUE and GREEN teams by %d POINTS!\n",
-				ctfgame.total1 - (ctfgame.total2 > ctfgame.total3)?ctfgame.total2:ctfgame.total3);
+				(ctfgame.total1 - (ctfgame.total2 > ctfgame.total3))?ctfgame.total2:ctfgame.total3);
 		else if (ctfgame.total2 > ctfgame.total1 && ctfgame.total2 > ctfgame.total3) 
 			safe_bprintf(PRINT_CHAT, "BLUE team won over the RED and GREEN teams by %d POINTS!\n",
-				ctfgame.total2 - (ctfgame.total1 > ctfgame.total3)?ctfgame.total1:ctfgame.total3);
+				(ctfgame.total2 - (ctfgame.total1 > ctfgame.total3))?ctfgame.total1:ctfgame.total3);
 		else if (ctfgame.total3 > ctfgame.total1 && ctfgame.total3 > ctfgame.total2) 
 			safe_bprintf(PRINT_CHAT, "GREEN team won over the RED and BLUE teams by %d POINTS!\n",
-				ctfgame.total3 - (ctfgame.total1 > ctfgame.total2)?ctfgame.total1:ctfgame.total2);
+				(ctfgame.total3 - (ctfgame.total1 > ctfgame.total2))?ctfgame.total1:ctfgame.total2);
 		else
 			safe_bprintf(PRINT_CHAT, "TIE GAME!\n");
 	}

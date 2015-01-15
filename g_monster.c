@@ -1045,7 +1045,7 @@ int PatchMonsterModel (char *modelname)
 		return 0;	// we're in baseq2
 
 	sprintf (outfilename, "%s/%s", gamedir->string, modelname);
-	if (outfile = fopen (outfilename, "rb"))
+	if ((outfile = fopen (outfilename, "rb")))
 	{
 		// output file already exists, move along
 		fclose (outfile);

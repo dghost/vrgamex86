@@ -4176,7 +4176,7 @@ int PatchDeadSoldier ()
 		return 0;	// we're in baseq2
 
 	sprintf (outfilename, "%s/%s", gamedir->string,DEADSOLDIER_MODEL);
-	if (outfile = fopen (outfilename, "rb"))
+	if ((outfile = fopen (outfilename, "rb")))
 	{
 		// output file already exists, move along
 		fclose (outfile);
