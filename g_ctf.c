@@ -4234,6 +4234,8 @@ void CTFWinElection(void)
 		strncpy(level.forcemap, ctfgame.elevel, sizeof(level.forcemap) - 1);
 		EndDMLevel();
 		break;
+    default:
+        break;
 	}
 	ctfgame.election = ELECT_NONE;
 }
@@ -4742,6 +4744,8 @@ int CTFUpdateJoinMenu(edict_t *ent)
 	case MATCH_GAME :
 		joinmenu[jmenu_match].text = "*MATCH IN PROGRESS";
 		break;
+    default:
+        break;
 	}
 
 	if (joinmenu[jmenu_red].text)
@@ -4871,6 +4875,8 @@ int TTCTFUpdateJoinMenu(edict_t *ent)
 	case MATCH_GAME :
 		ttctf_joinmenu[ttctf_jmenu_match].text = "*MATCH IN PROGRESS";
 		break;
+    default:
+        break;
 	}
 
 	if (ttctf_joinmenu[ttctf_jmenu_red].text)
@@ -5061,6 +5067,8 @@ qboolean CTFCheckRules(void)
 				CTFEndMatch();
 				gi.positioned_sound (world->s.origin, world, CHAN_AUTO | CHAN_RELIABLE, gi.soundindex("misc/bigtele.wav"), 1, ATTN_NONE, 0);
 				return false;
+            default:
+                break;
 			}
 		}
 
@@ -5110,6 +5118,8 @@ qboolean CTFCheckRules(void)
 				gi.positioned_sound (world->s.origin, world, CHAN_AUTO | CHAN_RELIABLE, gi.soundindex("world/10_0.wav"), 1, ATTN_NONE, 0);
 			}
 			break;
+        default:
+            break;
 		}
 		return false;
 
