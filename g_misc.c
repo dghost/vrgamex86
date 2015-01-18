@@ -943,7 +943,7 @@ Default _cone value is 10 (used to set size of light for spotlights)
 
 #define START_OFF	1
 
-static void light_use (edict_t *self, edict_t *other, edict_t *activator)
+void light_use (edict_t *self, edict_t *other, edict_t *activator)
 {
 	if (self->spawnflags & START_OFF)
 	{
@@ -2922,7 +2922,7 @@ If START_OFF, this entity must be used before it starts
 // don't let field width of any clock messages change, or it
 // could cause an overwrite after a game load
 
-static void func_clock_reset (edict_t *self)
+void func_clock_reset (edict_t *self)
 {
 	self->activator = NULL;
 	if (self->spawnflags & 1)
@@ -2945,7 +2945,7 @@ typedef struct zhead_s {
    int      size;
 } zhead_t;
 
-static void func_clock_format_countdown (edict_t *self)
+void func_clock_format_countdown (edict_t *self)
 {
 	zhead_t *z = ( zhead_t * )self->message - 1;
 	int size = z->size - sizeof (zhead_t);
@@ -3231,7 +3231,7 @@ void teleport_transition_ents (edict_t *transition, edict_t *teleporter, edict_t
 // obnoxious error message.
 
 #define MAXCHOICES 8
-static edict_t *G_PickDestination (char *targetname)
+edict_t *G_PickDestination (char *targetname)
 {
 	edict_t	*ent = NULL;
 	int		num_choices = 0;

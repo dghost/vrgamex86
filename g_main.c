@@ -30,7 +30,6 @@ spawn_temp_t	st;
 int	sm_meat_index;
 int	snd_fry;
 int meansOfDeath;
-
 edict_t		*g_edicts;
 
 cvar_t	*deathmatch;
@@ -140,7 +139,6 @@ void ClientUserinfoChanged (edict_t *ent, char *userinfo);
 void ClientDisconnect (edict_t *ent);
 void ClientBegin (edict_t *ent);
 void ClientCommand (edict_t *ent);
-void RunEntity (edict_t *ent);
 void WriteGame (char *filename, qboolean autosave);
 void ReadGame (char *filename);
 void WriteLevel (char *filename);
@@ -148,6 +146,7 @@ void ReadLevel (char *filename);
 void InitGame (void);
 void G_RunFrame (void);
 
+qboolean paused = false;
 //===================================================================
 
 void ShutdownGame (void)

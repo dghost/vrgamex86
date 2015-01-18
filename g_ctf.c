@@ -1381,7 +1381,7 @@ gitem_t *CTFWhat_Flag(edict_t *ent)
 	return NULL;
 }
 
-static void CTFDropFlagTouch(edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf)
+void CTFDropFlagTouch(edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf)
 {
 	//owner (who dropped us) can't touch for two secs
 	if ( (other == ent->owner) && 
@@ -1392,7 +1392,7 @@ static void CTFDropFlagTouch(edict_t *ent, edict_t *other, cplane_t *plane, csur
 	Touch_Item (ent, other, plane, surf);
 }
 
-static void CTFDropFlagThink (edict_t *ent)
+void CTFDropFlagThink (edict_t *ent)
 {
 	// auto return the flag
 	// reset flag will remove ourselves
@@ -1534,7 +1534,7 @@ qboolean CTFDrop_Flag(edict_t *ent, gitem_t *item)
 	}
 }
 
-static void CTFFlagThink(edict_t *ent)
+void CTFFlagThink(edict_t *ent)
 {
 	if (ent->solid != SOLID_NOT)
 		ent->s.frame = 173 + (((ent->s.frame - 173) + 1) % 16);
@@ -1681,7 +1681,7 @@ void CTFID_f (edict_t *ent)
 	}
 }
 
-static void CTFSetIDView(edict_t *ent)
+void CTFSetIDView(edict_t *ent)
 {
 	vec3_t	forward, dir;
 	trace_t	tr;
@@ -2884,7 +2884,7 @@ qboolean CTFPickup_Tech (edict_t *ent, edict_t *other)
 	return true;
 }
 
-static void SpawnTech(gitem_t *item, edict_t *spot);
+void SpawnTech(gitem_t *item, edict_t *spot);
 
 void CTFTechTouch(edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf)
 {
@@ -2895,7 +2895,7 @@ void CTFTechTouch(edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *sur
 	Touch_Item (ent, other, plane, surf);
 }
 
-static edict_t *FindTechSpawn(void)
+edict_t *FindTechSpawn(void)
 {
 	edict_t *spot = NULL;
 	int i = rand() % 16;
@@ -2907,7 +2907,7 @@ static edict_t *FindTechSpawn(void)
 	return spot;
 }
 
-static void TechThink(edict_t *tech)
+void TechThink(edict_t *tech)
 {
 	edict_t *spot;
 
@@ -3185,7 +3185,7 @@ void CheckNumTechs (void)
 	}
 }
 
-static void SpawnTech(gitem_t *item, edict_t *spot)
+void SpawnTech(gitem_t *item, edict_t *spot)
 {
 	edict_t	*ent;
 	vec3_t	forward, right;
@@ -3225,7 +3225,7 @@ static void SpawnTech(gitem_t *item, edict_t *spot)
 	gi.linkentity (ent);
 }
 
-static void SpawnTechs (edict_t *ent)
+void SpawnTechs (edict_t *ent)
 {
 	gitem_t *tech;
 	edict_t *spot;
@@ -3603,7 +3603,7 @@ struct {
 };
 
 
-static void CTFSay_Team_Location(edict_t *who, char *buf)
+void CTFSay_Team_Location(edict_t *who, char *buf)
 {
 	edict_t *what = NULL;
 	edict_t *hot = NULL;
@@ -3709,7 +3709,7 @@ static void CTFSay_Team_Location(edict_t *who, char *buf)
 	strcat(buf, item->pickup_name);
 }
 
-static void CTFSay_Team_Armor(edict_t *who, char *buf)
+void CTFSay_Team_Armor(edict_t *who, char *buf)
 {
 	gitem_t		*item;
 	int			index, cells;
@@ -3743,7 +3743,7 @@ static void CTFSay_Team_Armor(edict_t *who, char *buf)
 		strcpy(buf, "no armor");
 }
 
-static void CTFSay_Team_Health(edict_t *who, char *buf)
+void CTFSay_Team_Health(edict_t *who, char *buf)
 {
 	if (who->health <= 0)
 		strcpy(buf, "dead");
@@ -3751,7 +3751,7 @@ static void CTFSay_Team_Health(edict_t *who, char *buf)
 		sprintf(buf, "%i health", who->health);
 }
 
-static void CTFSay_Team_Tech(edict_t *who, char *buf)
+void CTFSay_Team_Tech(edict_t *who, char *buf)
 {
 	gitem_t *tech;
 	int i;
@@ -3769,7 +3769,7 @@ static void CTFSay_Team_Tech(edict_t *who, char *buf)
 	strcpy(buf, "no powerup");
 }
 
-static void CTFSay_Team_Weapon(edict_t *who, char *buf)
+void CTFSay_Team_Weapon(edict_t *who, char *buf)
 {
 	if (who->client->pers.weapon)
 		strcpy(buf, who->client->pers.weapon->pickup_name);
@@ -3777,7 +3777,7 @@ static void CTFSay_Team_Weapon(edict_t *who, char *buf)
 		strcpy(buf, "none");
 }
 
-static void CTFSay_Team_Sight(edict_t *who, char *buf)
+void CTFSay_Team_Sight(edict_t *who, char *buf)
 {
 	int i;
 	edict_t *targ;
@@ -3908,7 +3908,7 @@ void CTFSay_Team(edict_t *who, char *msg)
 The origin is the bottom of the banner.
 The banner is 248 tall.
 */
-static void misc_ctf_banner_think (edict_t *ent)
+void misc_ctf_banner_think (edict_t *ent)
 {
 	ent->s.frame = (ent->s.frame + 1) % 16;
 	ent->nextthink = level.time + FRAMETIME;
@@ -3958,7 +3958,7 @@ void SP_misc_ctf_small_banner (edict_t *ent)
 
 /*-----------------------------------------------------------------------*/
 
-static void SetLevelName(pmenu_t *p)
+void SetLevelName(pmenu_t *p)
 {
 	static char levelname[33];
 
@@ -5175,7 +5175,7 @@ qboolean CTFCheckRules(void)
  * just here to help old map conversions
  *--------------------------------------------------------------------------*/
 
-static void old_teleporter_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+void old_teleporter_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
 {
 	edict_t		*dest;
 	int			i;
