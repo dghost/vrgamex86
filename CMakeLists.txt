@@ -77,7 +77,51 @@ set(GAME_SOURCES
     player/p_weapon.c
 )
 
+set(GAME_HEADERS
+	../qcommon/shared/q_shared.h
+	acesrc/acebot.h
+	g_ctf.h
+	g_local.h
+	game.h
+	km_cvar.h
+	laz_misc.h
+	monster/m_actor.h
+	monster/m_berserk.h
+	monster/m_boss2.h
+	monster/m_boss31.h
+	monster/m_boss32.h
+	monster/m_brain.h
+	monster/m_chick.h
+	monster/m_flipper.h
+	monster/m_float.h
+	monster/m_flyer.h
+	monster/m_gladiator.h
+	monster/m_gunner.h
+	monster/m_hover.h
+	monster/m_infantry.h
+	monster/m_insane.h
+	monster/m_medic.h
+	monster/m_mutant.h
+	monster/m_parasite.h
+	monster/m_player.h
+	monster/m_rider.h
+	monster/m_soldier.h
+	monster/m_supertank.h
+	monster/m_tank.h
+	pak.h
+	player/p_menu.h
+	player/p_text.h
+	resource.h
+	tables/clientfields.h
+	tables/fields.h
+	tables/gamefunc_decs.h
+	tables/gamefunc_list.h
+	tables/gamemmove_decs.h
+	tables/gamemmove_list.h
+	tables/levelfields.h
+)
+
 add_definitions(-DDISABLE_FOG)
-add_library(vrgamex86 MODULE ${GAME_SOURCES})
+add_library(vrgamex86 MODULE ${GAME_SOURCES} ${GAME_HEADERS})
 set_target_properties(vrgamex86 PROPERTIES PREFIX "")
 target_compile_options(vrgamex86 PRIVATE -fvisibility=hidden)
