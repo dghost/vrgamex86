@@ -204,7 +204,7 @@ is loaded.
 */
 void InitGame (void)
 {
-	gi.dprintf ("==== InitGame (Lazarus) ====\n");
+	gi.dprintf ("\n==== InitGame (Lazarus) ====\n");
 	gi.dprintf("by Mr. Hyde & Mad Dog\ne-mail: rascal@vicksburg.com\n\n");
 
 	// Knightmare- init cvars
@@ -297,7 +297,6 @@ void InitGame (void)
 	m_yaw = gi.cvar("m_yaw", "0.022", 0);
 	monsterjump = gi.cvar("monsterjump", "1", CVAR_SERVERINFO|CVAR_LATCH);
 	rocket_strafe = gi.cvar("rocket_strafe", "0", 0);
-	s_primary = gi.cvar("s_primary", "0", 0);
 #ifdef KMQUAKE2_ENGINE_MOD
 	sv_maxgibs = gi.cvar("sv_maxgibs", "160", CVAR_SERVERINFO);
 #else
