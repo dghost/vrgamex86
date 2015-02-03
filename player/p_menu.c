@@ -42,9 +42,10 @@ pmenuhnd_t *PMenu_Open(edict_t *ent, pmenu_t *entries, int cur, int num, void *a
 	hnd = malloc(sizeof(*hnd));
 
 	hnd->arg = arg;
-	hnd->entries = entries;
-	memcpy(hnd->entries, entries, sizeof(pmenu_t) * num);
-	// duplicate the strings since they may be from static memory
+	hnd->entries = malloc(sizeof(pmenu_t) * num);
+    memcpy(hnd->entries, entries, sizeof(pmenu_t) * num);
+
+    // duplicate the strings since they may be from static memory
 	for (i = 0; i < num; i++)
 		if (entries[i].text)
 			hnd->entries[i].text = strdup(entries[i].text);
@@ -75,10 +76,31 @@ pmenuhnd_t *PMenu_Open(edict_t *ent, pmenu_t *entries, int cur, int num, void *a
 
 void PMenu_Close(edict_t *ent)
 {
-	if (!ent->client->menu)
+    pmenuhnd_t *hnd;
+    int i;
+    
+    if (!ent->client->menu)
 		return;
+    
+    hnd = ent->client->menu;
+    if (hnd->entries) {
+        for (i = 0; i < hnd->num; i++) {
+            if (hnd->entries[i].text) {
+                free(hnd->entries[i].text);
+                hnd->entries[i].text = NULL;
+            }
+        }
+        free(hnd->entries);
+        hnd->entries = NULL;
 
-	free(ent->client->menu);
+    }
+    
+    if (hnd->arg) {
+        free(hnd->arg);
+        hnd->arg = NULL;
+    }
+    
+    free(ent->client->menu);
 	ent->client->menu = NULL;
 	ent->client->showscores = false;
 }
