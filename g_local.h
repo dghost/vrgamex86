@@ -1931,9 +1931,6 @@ struct edict_s
 	edict_t		*next_grenade;				// Used to build a list of active grenades
 	edict_t		*prev_grenade;
 
-	// FMOD
-	int			*stream;	// Actually a FSOUND_STREAM * or FMUSIC_MODULE *
-	int			channel;
 
 	// gib type - specifies folder where gib models are found.
 	int			gib_type;
