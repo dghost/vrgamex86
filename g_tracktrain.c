@@ -283,7 +283,7 @@ void trackchange_use (edict_t *self, edict_t *other, edict_t *activator)
 
 	// Adjust speed so that "distance" rotation and "height" movement are achieved
 	// simultaneously.
-	tt = fabs(self->viewheight) / self->speed;
+	tt = abs(self->viewheight) / self->speed;
 	tr = fabs(self->moveinfo.distance) / self->speed;
 	time = max(tt,tr);
 	time = 0.1 * ((int)(10.*time-0.5)+1);

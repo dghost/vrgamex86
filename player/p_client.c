@@ -2726,7 +2726,7 @@ void ClientSpycam(edict_t *ent)
 					if(diff > 180)
 						diff -= 360;
 					camera->ideal_yaw += diff;
-					if((abs(diff) > 100) && camera->vehicle)
+					if((fabsf(diff) > 100) && camera->vehicle)
 					{
 						vec3_t	angles;
 						vec3_t	end, f;
