@@ -79,10 +79,10 @@ set(GAME_SOURCES
 
 set(GAME_HEADERS
 	../qcommon/shared/q_shared.h
+	../qcommon/shared/game.h
 	acesrc/acebot.h
 	g_ctf.h
 	g_local.h
-	game.h
 	km_cvar.h
 	laz_misc.h
 	monster/m_actor.h
