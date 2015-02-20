@@ -1226,7 +1226,7 @@ removeflags:
 		if (alias_from_pak)
 			gi.TagFree(alias_data);
 		else
-			free(&alias_data);
+			G_Free(&alias_data);
 #endif
 	}
 
@@ -1235,7 +1235,7 @@ removeflags:
 #ifdef KMQUAKE2_ENGINE_MOD // use new engine function instead
 		gi.FreeFile(newents);
 #else
-		free(&newents);
+		G_Free(&newents);
 #endif*/
 
 	gi.dprintf ("%i entities inhibited\n", inhibit);

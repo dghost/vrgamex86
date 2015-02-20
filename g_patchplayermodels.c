@@ -135,7 +135,7 @@ int PatchPlayerModels (char *modelname)
 	fread (&model, sizeof (dmdl_t), 1, infile);
 	
 	datasize = model.ofs_end - model.ofs_skins;
-	if ( !(data = malloc (datasize)) )	// make sure freed locally
+	if ( !(data = G_Malloc (datasize)) )	// make sure freed locally
 	{
 		gi.dprintf ("PatchPlayerModels: Could not allocate memory for model\n");
 		return 0;
@@ -165,7 +165,7 @@ int PatchPlayerModels (char *modelname)
 	{
 		// file couldn't be created for some other reason
 		gi.dprintf ("PatchPlayerModels: Could not save %s\n", outfilename);
-		free (data);
+		G_Free(data);
 		return 0;
 	}
 	
@@ -175,6 +175,6 @@ int PatchPlayerModels (char *modelname)
 	
 	fclose (outfile);
 	gi.dprintf ("PatchPlayerModels: Saved %s\n", outfilename);
-	free (data);
+	G_Free(data);
 	return 1;
 }

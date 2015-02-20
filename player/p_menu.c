@@ -39,16 +39,16 @@ pmenuhnd_t *PMenu_Open(edict_t *ent, pmenu_t *entries, int cur, int num, void *a
 		PMenu_Close(ent);
 	}
 
-	hnd = malloc(sizeof(*hnd));
+	hnd = G_Malloc(sizeof(*hnd));
 
 	hnd->arg = arg;
-	hnd->entries = malloc(sizeof(pmenu_t) * num);
+	hnd->entries = G_Malloc(sizeof(pmenu_t) * num);
     memcpy(hnd->entries, entries, sizeof(pmenu_t) * num);
 
     // duplicate the strings since they may be from static memory
 	for (i = 0; i < num; i++)
 		if (entries[i].text)
-			hnd->entries[i].text = strdup(entries[i].text);
+			hnd->entries[i].text = G_CopyString(entries[i].text);
 
 	hnd->num = num;
 
@@ -86,21 +86,21 @@ void PMenu_Close(edict_t *ent)
     if (hnd->entries) {
         for (i = 0; i < hnd->num; i++) {
             if (hnd->entries[i].text) {
-                free(hnd->entries[i].text);
+                G_Free(hnd->entries[i].text);
                 hnd->entries[i].text = NULL;
             }
         }
-        free(hnd->entries);
+        G_Free(hnd->entries);
         hnd->entries = NULL;
 
     }
     
     if (hnd->arg) {
-        free(hnd->arg);
+        G_Free(hnd->arg);
         hnd->arg = NULL;
     }
     
-    free(ent->client->menu);
+    G_Free(ent->client->menu);
 	ent->client->menu = NULL;
 	ent->client->showscores = false;
 }
@@ -109,8 +109,8 @@ void PMenu_Close(edict_t *ent)
 void PMenu_UpdateEntry(pmenu_t *entry, const char *text, int align, SelectFunc_t SelectFunc)
 {
 	if (entry->text)
-		free(entry->text);
-	entry->text = strdup(text);
+		G_Free(entry->text);
+	entry->text = G_CopyString(text);
 	entry->align = align;
 	entry->SelectFunc = SelectFunc;
 }

@@ -5528,7 +5528,7 @@ void CTFAdmin_Settings(edict_t *ent, pmenuhnd_t *p)
 
 	PMenu_Close(ent);
 
-	settings = malloc(sizeof(*settings));
+	settings = G_Malloc(sizeof(*settings));
 
 	settings->matchlen = matchtime->value;
 	settings->matchsetuplen = matchsetuptime->value;
@@ -5792,7 +5792,7 @@ void CTFWarp(edict_t *ent)
 		return;
 	}
 
-	mlist = strdup(warp_list->string);
+	mlist = G_CopyString(warp_list->string);
 
 	token = strtok(mlist, seps);
 	while (token != NULL) {
@@ -5804,11 +5804,11 @@ void CTFWarp(edict_t *ent)
 	if (token == NULL) {
 		safe_cprintf(ent, PRINT_HIGH, "Unknown CTF level.\n");
 		safe_cprintf(ent, PRINT_HIGH, "Available levels are: %s\n", warp_list->string);
-		free(mlist);
+		G_Free(mlist);
 		return;
 	}
 
-	free(mlist);
+	G_Free(mlist);
 
 
 	if (ent->client->resp.admin) {

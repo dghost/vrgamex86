@@ -292,7 +292,7 @@ void DeleteReflection (edict_t *ent, int index)
 			if(r)
 			{
 				if(r->client)
-					free(r->client);
+					G_Free(r->client);
 				memset (r, 0, sizeof(*r));
 				r->classname = "freed";
 				r->freetime = level.time;
@@ -307,7 +307,7 @@ void DeleteReflection (edict_t *ent, int index)
 		if(r)
 		{
 			if(r->client)
-				free(r->client);
+				G_Free(r->client);
 			memset (r, 0, sizeof(*r));
 			r->classname = "freed";
 			r->freetime = level.time;
@@ -376,7 +376,7 @@ void AddReflection (edict_t *ent)
 			}
 			if (ent->client && !ent->reflection[i]->client)
 			{
-				cl = (gclient_t *)malloc(sizeof(gclient_t)); 
+				cl = (gclient_t *)G_Malloc(sizeof(gclient_t)); 
 				ent->reflection[i]->client = cl; 
 			}
 			if (ent->client && ent->reflection[i]->client)

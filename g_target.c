@@ -3074,7 +3074,7 @@ void target_monitor_off (edict_t *self)
 	}
 	faker = player->client->camplayer;
 	VectorCopy(faker->s.origin,player->s.origin);
-	free(faker->client); 
+	G_Free(faker->client); 
 	G_FreeEdict (faker); 
 	player->client->ps.pmove.origin[0] = player->s.origin[0]*8;
 	player->client->ps.pmove.origin[1] = player->s.origin[1]*8;
@@ -3239,7 +3239,7 @@ void use_target_monitor (edict_t *self, edict_t *other, edict_t *activator)
 	VectorCopy(activator->mins,faker->mins);
 	VectorCopy(activator->maxs,faker->maxs);
     // create a client so you can pick up items/be shot/etc while in camera
-	cl = (gclient_t *) malloc(sizeof(gclient_t)); 
+	cl = (gclient_t *) G_Malloc(sizeof(gclient_t)); 
 	faker->client = cl; 
 	faker->target_ent = activator;
 	gi.linkentity (faker); 
@@ -3685,7 +3685,7 @@ void use_target_change (edict_t *self, edict_t *other, edict_t *activator)
 	if(!self->target)
 		return;
 	L = strlen(self->target);
-	buffer = (char *)malloc(L+1);
+	buffer = (char *)G_Malloc(L+1);
 	strcpy(buffer,self->target);
 	newtarget = strstr(buffer,",");
 	if(newtarget)
@@ -3775,7 +3775,7 @@ void use_target_change (edict_t *self, edict_t *other, edict_t *activator)
 		gi.linkentity(target_ent);
 		target_ent = G_Find(target_ent,FOFS(targetname),target);
 	}
-	free(buffer);
+	G_Free(buffer);
 	if(newteams)
 		G_FindTeams();
 }

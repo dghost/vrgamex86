@@ -290,7 +290,7 @@ int main(int argc, char *argv[])
 	uint8_t *buffer1;
 	int bufsize = 20000;
 	
-	buffer1 = (uint8_t *)malloc(bufsize);
+	buffer1 = (uint8_t *)G_Malloc(bufsize);
 
 	buffer1[500] = 'c';
 	buffer1[785] = 's';
@@ -305,7 +305,7 @@ int main(int argc, char *argv[])
 	printf("Output: %c %c\n",buffer1[500],buffer1[785]);
 	printf("Compressed: %d Uncompressed:%d\n",csize,ucsize);
 
-	free(buffer1);
+	G_Free(buffer1);
 
 	return EXIT_SUCCESS;
 }

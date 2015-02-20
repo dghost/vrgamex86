@@ -479,6 +479,14 @@ char *G_CopyString (char *in)
 	return out;
 }
 
+void *G_Malloc( int32_t size )
+{
+    return gi.TagMalloc(size, TAG_LEVEL);
+}
+
+void G_Free(void *block ) {
+    gi.TagFree(block);
+}
 
 void G_InitEdict (edict_t *e)
 {

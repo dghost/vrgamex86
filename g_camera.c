@@ -38,7 +38,7 @@ void camera_off (edict_t *ent)
 	if(ent->client->spycam->svflags & SVF_MONSTER)
 		ent->client->spycam->svflags &= ~SVF_NOCLIENT;
 	VectorCopy(ent->client->camplayer->s.origin,ent->s.origin);
-	free(ent->client->camplayer->client); 
+	G_Free(ent->client->camplayer->client); 
 	G_FreeEdict (ent->client->camplayer); 
 
 	// set angles
@@ -144,7 +144,7 @@ void camera_on (edict_t *ent)
 	VectorCopy(ent->mins,faker->mins);
 	VectorCopy(ent->maxs,faker->maxs);
     // create a client so you can pick up items/be shot/etc while in camera
-	cl = (gclient_t *) malloc(sizeof(gclient_t)); 
+	cl = (gclient_t *) G_Malloc(sizeof(gclient_t)); 
 	memset(cl,0,sizeof(gclient_t));
 	ent->client->camplayer->client = cl; 
 	ent->client->camplayer->target_ent = ent;

@@ -43,10 +43,10 @@ void Text_Close(edict_t *ent)
 	if(!ent->client->textdisplay) return;
 	if(ent->client->textdisplay->buffer)
 	{
-		free(ent->client->textdisplay->buffer);
+		G_Free(ent->client->textdisplay->buffer);
 		ent->client->textdisplay->buffer = NULL;
 	}
-	free(ent->client->textdisplay);
+	G_Free(ent->client->textdisplay);
 	ent->client->textdisplay = NULL;
 	ent->client->showscores = false;
 }
@@ -253,7 +253,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 	qboolean	linebreak;
 	qboolean	do_linebreaks;
 
-	hnd = malloc(sizeof(*hnd));
+	hnd = G_Malloc(sizeof(*hnd));
 	// If a file, open and read it
 	if(flags & 1)
 	{
@@ -271,7 +271,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			return;
 		}
 		hnd->allocated = textsize + 128; // add some slop for additional control characters
-		hnd->buffer = malloc(hnd->allocated);
+		hnd->buffer = G_Malloc(hnd->allocated);
 		if(!hnd->buffer)
 		{
 			gi.dprintf("Memory allocation failure on target_text\n");
@@ -327,7 +327,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 								in_pak = true;
 								fseek(f,pakitem.start,SEEK_SET);
 								hnd->allocated = pakitem.size + 128;  // add some slop for additional control characters
-								hnd->buffer = malloc(hnd->allocated);
+								hnd->buffer = G_Malloc(hnd->allocated);
 								if(!hnd->buffer)
 								{
 									fclose(f);
@@ -359,7 +359,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			L = ftell (f);
 			fseek(f,0,SEEK_SET);
 			hnd->allocated = L+128;
-			hnd->buffer = malloc(hnd->allocated);
+			hnd->buffer = G_Malloc(hnd->allocated);
 			if(!hnd->buffer)
 			{
 				gi.dprintf("Memory allocation failure on target_text\n");
@@ -383,7 +383,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 	{
 		L = strlen(message);
 		hnd->allocated = L+128;
-		hnd->buffer = malloc(hnd->allocated);
+		hnd->buffer = G_Malloc(hnd->allocated);
 		if(!hnd->buffer)
 		{
 			gi.dprintf("Memory allocation failure\n");
@@ -534,7 +534,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 					if(hnd->size >= hnd->allocated) {
 						hnd->allocated += 128;
 						temp_buffer = hnd->buffer;
-						hnd->buffer = malloc(hnd->allocated);
+						hnd->buffer = G_Malloc(hnd->allocated);
 						if(!hnd->buffer)
 						{
 							gi.dprintf("Memory allocation failure\n");
@@ -545,7 +545,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 						memcpy(hnd->buffer,temp_buffer,hnd->size);
 						p1 = hnd->buffer + (p2-temp_buffer);
 						p2 = p1;
-						free(temp_buffer);
+						G_Free(temp_buffer);
 					}
 					p1 = p2-1;
 					p2 = hnd->buffer + hnd->size;
@@ -570,7 +570,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			if(hnd->size > hnd->allocated) {
 				hnd->allocated += 128;
 				temp_buffer = hnd->buffer;
-				hnd->buffer = malloc(hnd->allocated);
+				hnd->buffer = G_Malloc(hnd->allocated);
 				if(!hnd->buffer)
 				{
 					gi.dprintf("Memory allocation failure\n");
@@ -581,7 +581,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 				memcpy(hnd->buffer,temp_buffer,hnd->size);
 				p2 = p1;
 				p1 = hnd->buffer + (p2-temp_buffer);
-				free(temp_buffer);
+				G_Free(temp_buffer);
 			}
 			p2 = hnd->buffer + hnd->size;
 			p3 = p2 - 1;
@@ -600,7 +600,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			if(hnd->size > hnd->allocated) {
 				hnd->allocated += 128;
 				temp_buffer = hnd->buffer;
-				hnd->buffer = malloc(hnd->allocated);
+				hnd->buffer = G_Malloc(hnd->allocated);
 				if(!hnd->buffer)
 				{
 					gi.dprintf("Memory allocation failure\n");
@@ -611,7 +611,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 				memcpy(hnd->buffer,temp_buffer,hnd->size);
 				p2 = p1;
 				p1 = hnd->buffer + (p2-temp_buffer);
-				free(temp_buffer);
+				G_Free(temp_buffer);
 			}
 			p2 = hnd->buffer + hnd->size;
 			p3 = p2 - 2;

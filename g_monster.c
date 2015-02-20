@@ -1238,7 +1238,7 @@ int PatchMonsterModel (char *modelname)
 				fseek(fpak,pakitem.start,SEEK_SET);
 				fread(&model, sizeof(dmdl_t), 1, fpak);
 				datasize = model.ofs_end - model.ofs_skins;
-				if ( !(data = malloc (datasize)) )	// make sure freed locally
+				if ( !(data = G_Malloc (datasize)) )	// make sure freed locally
 				{
 					fclose(fpak);
 					gi.dprintf ("PatchMonsterModel: Could not allocate memory for model\n");
@@ -1259,7 +1259,7 @@ int PatchMonsterModel (char *modelname)
 		fread (&model, sizeof (dmdl_t), 1, infile);
 	
 		datasize = model.ofs_end - model.ofs_skins;
-		if ( !(data = malloc (datasize)) )	// make sure freed locally
+		if ( !(data = G_Malloc (datasize)) )	// make sure freed locally
 		{
 			gi.dprintf ("PatchMonsterModel: Could not allocate memory for model\n");
 			return 0;
@@ -1295,7 +1295,7 @@ int PatchMonsterModel (char *modelname)
 	{
 		// file couldn't be created for some other reason
 		gi.dprintf ("PatchMonsterModel: Could not save %s\n", outfilename);
-		free (data);
+		G_Free(data);
 		return 0;
 	}
 	
@@ -1305,7 +1305,7 @@ int PatchMonsterModel (char *modelname)
 	
 	fclose (outfile);
 	gi.dprintf ("PatchMonsterModel: Saved %s\n", outfilename);
-	free (data);
+	G_Free(data);
 	return 1;
 }
 
