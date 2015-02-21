@@ -119,7 +119,7 @@ typedef struct
     char *funcStr;
     byte *funcPtr;
 #ifdef Q2VR_ENGINE_MOD
-    hash128_t funcHash;
+    hash32_t funcHash;
 #endif
 } functionList_t;
 
@@ -134,7 +134,7 @@ typedef struct
     char	*mmoveStr;
     mmove_t *mmovePtr;
 #ifdef Q2VR_ENGINE_MOD
-    hash128_t mmoveHash;
+    hash32_t mmoveHash;
 #endif
 } mmoveList_t;
 
@@ -305,12 +305,12 @@ void InitGame (void)
         
         for (i = 0; mmoveList[i].mmoveStr; i++)
         {
-            mmoveList[i].mmoveHash = gi.Hash128(mmoveList[i].mmoveStr, strlen(mmoveList[i].mmoveStr));
+            mmoveList[i].mmoveHash = gi.Hash32(mmoveList[i].mmoveStr, strlen(mmoveList[i].mmoveStr));
         }
         
         for (i = 0; functionList[i].funcStr; i++)
         {
-            functionList[i].funcHash = gi.Hash128(functionList[i].funcStr, strlen(functionList[i].funcStr));
+            functionList[i].funcHash = gi.Hash32(functionList[i].funcStr, strlen(functionList[i].funcStr));
         }
         
         gi.dprintf(" Done!\n");
@@ -547,12 +547,12 @@ FindFunctionByName(char *name)
 {
     int i;
 #ifdef Q2VR_ENGINE_MOD
-    hash128_t nameHash = gi.Hash128(name, strlen(name));
+    hash32_t nameHash = gi.Hash32(name, strlen(name));
 #endif
     for (i = 0; functionList[i].funcStr; i++)
     {
 #ifdef Q2VR_ENGINE_MOD
-        if (!gi.HashCompare128(nameHash, functionList[i].funcHash) && !strcmp(name, functionList[i].funcStr))
+        if (!gi.HashCompare32(nameHash, functionList[i].funcHash) && !strcmp(name, functionList[i].funcStr))
 #else
         if (!strcmp(name, functionList[i].funcStr))
 #endif
@@ -598,12 +598,12 @@ FindMmoveByName(char *name)
 {
     int i;
 #ifdef Q2VR_ENGINE_MOD
-    hash128_t nameHash = gi.Hash128(name, strlen(name));
+    hash32_t nameHash = gi.Hash32(name, strlen(name));
 #endif
     for (i = 0; mmoveList[i].mmoveStr; i++)
     {
 #ifdef Q2VR_ENGINE_MOD
-        if (!gi.HashCompare128(nameHash, mmoveList[i].mmoveHash) && !strcmp(name, mmoveList[i].mmoveStr))
+        if (!gi.HashCompare32(nameHash, mmoveList[i].mmoveHash) && !strcmp(name, mmoveList[i].mmoveStr))
 #else
         if (!strcmp(name, mmoveList[i].mmoveStr))
 #endif
