@@ -305,12 +305,12 @@ void InitGame (void)
         
         for (i = 0; mmoveList[i].mmoveStr; i++)
         {
-            mmoveList[i].mmoveHash = gi.Hash(mmoveList[i].mmoveStr, strlen(mmoveList[i].mmoveStr));
+            mmoveList[i].mmoveHash = gi.Hash128(mmoveList[i].mmoveStr, strlen(mmoveList[i].mmoveStr));
         }
         
         for (i = 0; functionList[i].funcStr; i++)
         {
-            functionList[i].funcHash = gi.Hash(functionList[i].funcStr, strlen(functionList[i].funcStr));
+            functionList[i].funcHash = gi.Hash128(functionList[i].funcStr, strlen(functionList[i].funcStr));
         }
         
         gi.dprintf(" Done!\n");
@@ -547,12 +547,12 @@ FindFunctionByName(char *name)
 {
     int i;
 #ifdef Q2VR_ENGINE_MOD
-    hash128_t nameHash = gi.Hash(name, strlen(name));
+    hash128_t nameHash = gi.Hash128(name, strlen(name));
 #endif
     for (i = 0; functionList[i].funcStr; i++)
     {
 #ifdef Q2VR_ENGINE_MOD
-        if (!gi.HashCompare(nameHash, functionList[i].funcHash) && !strcmp(name, functionList[i].funcStr))
+        if (!gi.HashCompare128(nameHash, functionList[i].funcHash) && !strcmp(name, functionList[i].funcStr))
 #else
         if (!strcmp(name, functionList[i].funcStr))
 #endif
@@ -598,12 +598,12 @@ FindMmoveByName(char *name)
 {
     int i;
 #ifdef Q2VR_ENGINE_MOD
-    hash128_t nameHash = gi.Hash(name, strlen(name));
+    hash128_t nameHash = gi.Hash128(name, strlen(name));
 #endif
     for (i = 0; mmoveList[i].mmoveStr; i++)
     {
 #ifdef Q2VR_ENGINE_MOD
-        if (!gi.HashCompare(nameHash, mmoveList[i].mmoveHash) && !strcmp(name, mmoveList[i].mmoveStr))
+        if (!gi.HashCompare128(nameHash, mmoveList[i].mmoveHash) && !strcmp(name, mmoveList[i].mmoveStr))
 #else
         if (!strcmp(name, mmoveList[i].mmoveStr))
 #endif
