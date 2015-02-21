@@ -119,7 +119,7 @@ typedef struct
     char *funcStr;
     byte *funcPtr;
 #ifdef Q2VR_ENGINE_MOD
-    hash_t funcHash;
+    hash128_t funcHash;
 #endif
 } functionList_t;
 
@@ -134,7 +134,7 @@ typedef struct
     char	*mmoveStr;
     mmove_t *mmovePtr;
 #ifdef Q2VR_ENGINE_MOD
-    hash_t mmoveHash;
+    hash128_t mmoveHash;
 #endif
 } mmoveList_t;
 
@@ -547,7 +547,7 @@ FindFunctionByName(char *name)
 {
     int i;
 #ifdef Q2VR_ENGINE_MOD
-    hash_t nameHash = gi.Hash(name, strlen(name));
+    hash128_t nameHash = gi.Hash(name, strlen(name));
 #endif
     for (i = 0; functionList[i].funcStr; i++)
     {
@@ -598,7 +598,7 @@ FindMmoveByName(char *name)
 {
     int i;
 #ifdef Q2VR_ENGINE_MOD
-    hash_t nameHash = gi.Hash(name, strlen(name));
+    hash128_t nameHash = gi.Hash(name, strlen(name));
 #endif
     for (i = 0; mmoveList[i].mmoveStr; i++)
     {
