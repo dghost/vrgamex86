@@ -123,7 +123,7 @@ void SP_target_lightswitch (edict_t *self)
 		if(!e->inuse) continue;
 		if(!e->classname) continue;
 		if(e==self) continue;
-		if(!Q_stricmp(e->classname,"target_lightswitch"))
+		if(!Q_strcasecmp(e->classname,"target_lightswitch"))
 		{
 			gi.dprintf("Only one target_lightswitch per map is allowed.\n");
 			G_FreeEdict(self);

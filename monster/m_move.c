@@ -350,7 +350,7 @@ qboolean SV_movestep (edict_t *ent, vec3_t move, qboolean relink)
 				continue;
 			if(!grenade->classname)
 				continue;
-			if(!Q_stricmp(grenade->classname,"grenade") || !Q_stricmp(grenade->classname,"hgrenade"))
+			if(!Q_strcasecmp(grenade->classname,"grenade") || !Q_strcasecmp(grenade->classname,"hgrenade"))
 			{
 				VectorSubtract(grenade->s.origin,oldorg,dir);
 				g1 = VectorLength(dir);
@@ -379,7 +379,7 @@ qboolean SV_movestep (edict_t *ent, vec3_t move, qboolean relink)
 				continue;
 			if(!e->classname)
 				continue;
-			if(Q_stricmp(e->classname,"target_laser"))
+			if(Q_strcasecmp(e->classname,"target_laser"))
 				continue;
 			if(e->svflags & SVF_NOCLIENT)
 				continue;

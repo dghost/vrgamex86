@@ -381,7 +381,7 @@ void EndDMLevel (void)
 		f = NULL;
 		t = strtok(s, seps);
 		while (t != NULL) {
-			if (Q_stricmp(t, level.mapname) == 0) {
+			if (Q_strcasecmp(t, level.mapname) == 0) {
 				// it's in the list, go to the next one
 				t = strtok(NULL, seps);
 				if (t == NULL) { // end of list, go to first one
@@ -433,9 +433,9 @@ void CheckNeedPass (void)
 
 		need = 0;
 
-		if (*password->string && Q_stricmp(password->string, "none"))
+		if (*password->string && Q_strcasecmp(password->string, "none"))
 			need |= 1;
-		if (*spectator_password->string && Q_stricmp(spectator_password->string, "none"))
+		if (*spectator_password->string && Q_strcasecmp(spectator_password->string, "none"))
 			need |= 2;
 
 		gi.cvar_set("needpass", va("%d", need));

@@ -1005,7 +1005,7 @@ void G_SetClientEffects (edict_t *ent)
 		trace_t tr;
 
 		if(level.flashlight_cost > 0) {
-			if(!Q_stricmp(FLASHLIGHT_ITEM,"health") || 
+			if(!Q_strcasecmp(FLASHLIGHT_ITEM,"health") || 
 					(ent->client->pers.inventory[ITEM_INDEX(FindItem(FLASHLIGHT_ITEM))]>=level.flashlight_cost) ) {
 				// Player has items remaining
 				if(ent->client->flashlight_time <= level.time) {

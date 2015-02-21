@@ -58,7 +58,7 @@ void SP_FixCoopSpots (edict_t *self)
 		VectorSubtract(self->s.origin, spot->s.origin, d);
 		if (VectorLength(d) < 384)
 		{
-			if ((!self->targetname) || Q_stricmp(self->targetname, spot->targetname) != 0)
+			if ((!self->targetname) || Q_strcasecmp(self->targetname, spot->targetname) != 0)
 			{
 //				gi.dprintf("FixCoopSpots changed %s at %s targetname from %s to %s\n", self->classname, vtos(self->s.origin), self->targetname, spot->targetname);
 				self->targetname = spot->targetname;
@@ -76,7 +76,7 @@ void SP_CreateCoopSpots (edict_t *self)
 {
 	edict_t	*spot;
 
-	if(Q_stricmp(level.mapname, "security") == 0)
+	if(Q_strcasecmp(level.mapname, "security") == 0)
 	{
 		spot = G_Spawn();
 		spot->classname = "info_player_coop";
@@ -114,7 +114,7 @@ void SP_info_player_start(edict_t *self)
 {
 	if (!coop->value)
 		return;
-	if(Q_stricmp(level.mapname, "security") == 0)
+	if(Q_strcasecmp(level.mapname, "security") == 0)
 	{
 		// invoke one of our gross, ugly, disgusting hacks
 		self->think = SP_CreateCoopSpots;
@@ -147,20 +147,20 @@ void SP_info_player_coop(edict_t *self)
 		return;
 	}
 
-	if((Q_stricmp(level.mapname, "jail2") == 0)   ||
-	   (Q_stricmp(level.mapname, "jail4") == 0)   ||
-	   (Q_stricmp(level.mapname, "mine1") == 0)   ||
-	   (Q_stricmp(level.mapname, "mine2") == 0)   ||
-	   (Q_stricmp(level.mapname, "mine3") == 0)   ||
-	   (Q_stricmp(level.mapname, "mine4") == 0)   ||
-	   (Q_stricmp(level.mapname, "lab") == 0)     ||
-	   (Q_stricmp(level.mapname, "boss1") == 0)   ||
-	   (Q_stricmp(level.mapname, "fact3") == 0)   ||
-	   (Q_stricmp(level.mapname, "biggun") == 0)  ||
-	   (Q_stricmp(level.mapname, "space") == 0)   ||
-	   (Q_stricmp(level.mapname, "command") == 0) ||
-	   (Q_stricmp(level.mapname, "power2") == 0) ||
-	   (Q_stricmp(level.mapname, "strike") == 0))
+	if((Q_strcasecmp(level.mapname, "jail2") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "jail4") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "mine1") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "mine2") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "mine3") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "mine4") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "lab") == 0)     ||
+	   (Q_strcasecmp(level.mapname, "boss1") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "fact3") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "biggun") == 0)  ||
+	   (Q_strcasecmp(level.mapname, "space") == 0)   ||
+	   (Q_strcasecmp(level.mapname, "command") == 0) ||
+	   (Q_strcasecmp(level.mapname, "power2") == 0) ||
+	   (Q_strcasecmp(level.mapname, "strike") == 0))
 	{
 		// invoke one of our gross, ugly, disgusting hacks
 		self->think = SP_FixCoopSpots;
@@ -1417,7 +1417,7 @@ edict_t *SelectCoopSpawnPoint (edict_t *ent)
 		target = spot->targetname;
 		if (!target)
 			target = "";
-		if ( Q_stricmp(game.spawnpoint, target) == 0 )
+		if ( Q_strcasecmp(game.spawnpoint, target) == 0 )
 		{	// this is a coop spawn point for one of the clients here
 			index--;
 			if (!index)
@@ -1461,7 +1461,7 @@ void	SelectSpawnPoint (edict_t *ent, vec3_t origin, vec3_t angles, int *style, i
 			if (!game.spawnpoint[0] || !spot->targetname)
 				continue;
 
-			if (Q_stricmp(game.spawnpoint, spot->targetname) == 0)
+			if (Q_strcasecmp(game.spawnpoint, spot->targetname) == 0)
 				break;
 		}
 
@@ -2592,7 +2592,7 @@ void ClientSpycam(edict_t *ent)
 			}
 			if(dist > 8)
 			{
-				if(!thing || !thing->inuse || Q_stricmp(thing->classname,"thing"))
+				if(!thing || !thing->inuse || Q_strcasecmp(thing->classname,"thing"))
 					thing = camera->vehicle = SpawnThing();
 				thing->touch_debounce_time = level.time + 5.0;
 				thing->target_ent = camera;
@@ -2753,7 +2753,7 @@ void ClientSpycam(edict_t *ent)
 		if ( client->ucmd.buttons & BUTTON_ATTACK && camera->sounds >= 0 ) {
 			if (level.time >= camera->monsterinfo.attack_finished) {
 				client->latched_buttons &= ~BUTTON_ATTACK;
-				if(!Q_stricmp(camera->classname,"turret_breach"))
+				if(!Q_strcasecmp(camera->classname,"turret_breach"))
 				{
 					if(camera->sounds==5 || camera->sounds==6)
 						camera->monsterinfo.attack_finished = level.time;
@@ -3048,7 +3048,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		return;
 	}
 
-	if (ent->target_ent && !Q_stricmp(ent->target_ent->classname,"target_monitor"))
+	if (ent->target_ent && !Q_strcasecmp(ent->target_ent->classname,"target_monitor"))
 	{
 		edict_t	*monitor = ent->target_ent;
 		if(monitor->target_ent && monitor->target_ent->inuse)

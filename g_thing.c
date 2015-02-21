@@ -229,7 +229,7 @@ void thing_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *su
 			// make sure this is still a grenade
 			if(grenade->inuse)
 			{
-				if(Q_stricmp(grenade->classname,"grenade") && Q_stricmp(grenade->classname,"hgrenade"))
+				if(Q_strcasecmp(grenade->classname,"grenade") && Q_strcasecmp(grenade->classname,"hgrenade"))
 					other->next_grenade = grenade = NULL;
 			}
 			else

@@ -1561,7 +1561,7 @@ void SV_Physics_Toss (edict_t *ent)
 			ent->waterlevel = 0;
 
 		// tpp... don't do sounds for the camera
-		if(Q_stricmp(ent->classname,"chasecam"))
+		if(Q_strcasecmp(ent->classname,"chasecam"))
 		{
 		if (!wasinwater && isinwater)
 			gi.positioned_sound (old_origin, g_edicts, CHAN_AUTO, gi.soundindex("misc/h2ohit1.wav"), 1, 1, 0);
@@ -2634,7 +2634,7 @@ G_RunEntity
 */
 void G_RunEntity (edict_t *ent)
 {
-	if(level.freeze && Q_stricmp(ent->classname,"chasecam"))
+	if(level.freeze && Q_strcasecmp(ent->classname,"chasecam"))
 		return;
 
 	if (ent->prethink)

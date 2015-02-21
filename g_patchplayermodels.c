@@ -79,7 +79,7 @@ int PatchPlayerModels (char *modelname)
 		memset (skins[j], 0, MAX_SKINNAME);
 
 	// set model-specific data
-	if(!Q_stricmp(modelname,"male"))
+	if(!Q_strcasecmp(modelname,"male"))
 	{
 		numskins = 15;
 		sprintf (skins[0],	"players/male/cipher.pcx");
@@ -98,7 +98,7 @@ int PatchPlayerModels (char *modelname)
 		sprintf (skins[13], "players/male/sniper.pcx");
 		sprintf (skins[14], "players/male/viper.pcx");
 	}
-	else if(!Q_stricmp(modelname,"female"))
+	else if(!Q_strcasecmp(modelname,"female"))
 	{
 		numskins = 10;
 		sprintf (skins[0],  "players/female/athena.pcx");
@@ -112,7 +112,7 @@ int PatchPlayerModels (char *modelname)
 		sprintf (skins[8],  "players/female/venus.pcx");
 		sprintf (skins[9],  "players/female/voodoo.pcx");
 	}
-	else if(!Q_stricmp(modelname,"cyborg"))
+	else if(!Q_strcasecmp(modelname,"cyborg"))
 	{
 		numskins = 3;
 		sprintf (skins[0],  "players/cyborg/oni911.pcx");

@@ -66,7 +66,7 @@ edict_t *G_Find (edict_t *from, int fieldofs, char *match)
 		s = *(char **) ((byte *)from + fieldofs);
 		if (!s)
 			continue;
-		if (!Q_stricmp (s, match))
+		if (!Q_strcasecmp (s, match))
 			return from;
 	}
 
@@ -232,10 +232,10 @@ void G_UseTargets (edict_t *ent, edict_t *activator)
 						level.total_monsters--;
 			}
 			// and decrement secret count if target_secret is removed
-			else if(!Q_stricmp(t->classname,"target_secret"))
+			else if(!Q_strcasecmp(t->classname,"target_secret"))
 				level.total_secrets--;
 			// same deal with target_goal, but also turn off CD music if applicable
-			else if(!Q_stricmp(t->classname,"target_goal"))
+			else if(!Q_strcasecmp(t->classname,"target_goal"))
 			{
 				level.total_goals--;
 				if (level.found_goals >= level.total_goals)
@@ -259,9 +259,9 @@ void G_UseTargets (edict_t *ent, edict_t *activator)
 		while ((t = G_Find (t, FOFS(targetname), ent->target)))
 		{
 			// doors fire area portals in a specific way
-			if (!Q_stricmp(t->classname, "func_areaportal") &&
-				(!Q_stricmp(ent->classname, "func_door") || !Q_stricmp(ent->classname, "func_door_rotating") 
-				/*DWH*/ || !Q_stricmp(ent->classname,"func_door_rot_dh")))
+			if (!Q_strcasecmp(t->classname, "func_areaportal") &&
+				(!Q_strcasecmp(ent->classname, "func_door") || !Q_strcasecmp(ent->classname, "func_door_rotating") 
+				/*DWH*/ || !Q_strcasecmp(ent->classname,"func_door_rot_dh")))
 				continue;
 
 			if (t == ent)
@@ -855,7 +855,7 @@ edict_t	*LookingAt(edict_t *ent, int filter, vec3_t endpos, float *range)
 		gi.sound (ent, CHAN_AUTO, gi.soundindex ("misc/talk1.wav"), 1, ATTN_NORM, 0);
 		return NULL;
 	}
-	if((Q_stricmp(tr.ent->classname,"worldspawn") == 0) && (filter & LOOKAT_NOWORLD))
+	if((Q_strcasecmp(tr.ent->classname,"worldspawn") == 0) && (filter & LOOKAT_NOWORLD))
 	{
 		// world brush
 		gi.sound (ent, CHAN_AUTO, gi.soundindex ("misc/talk1.wav"), 1, ATTN_NORM, 0);
@@ -962,9 +962,9 @@ void G_UseTarget (edict_t *ent, edict_t *activator, edict_t *target)
 	if (target)
 	{
 		// doors fire area portals in a specific way
-		if (!Q_stricmp(target->classname, "func_areaportal") &&
-			(!Q_stricmp(ent->classname, "func_door") || !Q_stricmp(ent->classname, "func_door_rotating") 
-			|| !Q_stricmp(ent->classname,"func_door_rot_dh")))
+		if (!Q_strcasecmp(target->classname, "func_areaportal") &&
+			(!Q_strcasecmp(ent->classname, "func_door") || !Q_strcasecmp(ent->classname, "func_door_rotating") 
+			|| !Q_strcasecmp(ent->classname,"func_door_rot_dh")))
 			return;
 
 		if (target == ent)
@@ -995,105 +995,105 @@ IsIdMap
 
 qboolean IsIdMap (void)
 {
-	if (Q_stricmp(level.mapname, "base1") == 0)
+	if (Q_strcasecmp(level.mapname, "base1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "base2") == 0)
+	if (Q_strcasecmp(level.mapname, "base2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "base3") == 0)
+	if (Q_strcasecmp(level.mapname, "base3") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "biggun") == 0)
+	if (Q_strcasecmp(level.mapname, "biggun") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "boss1") == 0)
+	if (Q_strcasecmp(level.mapname, "boss1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "boss2") == 0)
+	if (Q_strcasecmp(level.mapname, "boss2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "bunk1") == 0)
+	if (Q_strcasecmp(level.mapname, "bunk1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "city1") == 0)
+	if (Q_strcasecmp(level.mapname, "city1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "city2") == 0)
+	if (Q_strcasecmp(level.mapname, "city2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "city3") == 0)
+	if (Q_strcasecmp(level.mapname, "city3") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "command") == 0)
+	if (Q_strcasecmp(level.mapname, "command") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "cool1") == 0)
+	if (Q_strcasecmp(level.mapname, "cool1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "fact1") == 0)
+	if (Q_strcasecmp(level.mapname, "fact1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "fact2") == 0)
+	if (Q_strcasecmp(level.mapname, "fact2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "fact3") == 0)
+	if (Q_strcasecmp(level.mapname, "fact3") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "hangar1") == 0)
+	if (Q_strcasecmp(level.mapname, "hangar1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "hangar2") == 0)
+	if (Q_strcasecmp(level.mapname, "hangar2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "jail1") == 0)
+	if (Q_strcasecmp(level.mapname, "jail1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "jail2") == 0)
+	if (Q_strcasecmp(level.mapname, "jail2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "jail3") == 0)
+	if (Q_strcasecmp(level.mapname, "jail3") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "jail4") == 0)
+	if (Q_strcasecmp(level.mapname, "jail4") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "jail5") == 0)
+	if (Q_strcasecmp(level.mapname, "jail5") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "lab") == 0)
+	if (Q_strcasecmp(level.mapname, "lab") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "mine1") == 0)
+	if (Q_strcasecmp(level.mapname, "mine1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "mine2") == 0)
+	if (Q_strcasecmp(level.mapname, "mine2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "mine3") == 0)
+	if (Q_strcasecmp(level.mapname, "mine3") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "mine4") == 0)
+	if (Q_strcasecmp(level.mapname, "mine4") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "mintro") == 0)
+	if (Q_strcasecmp(level.mapname, "mintro") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "power1") == 0)
+	if (Q_strcasecmp(level.mapname, "power1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "power2") == 0)
+	if (Q_strcasecmp(level.mapname, "power2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "security") == 0)
+	if (Q_strcasecmp(level.mapname, "security") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "space") == 0)
+	if (Q_strcasecmp(level.mapname, "space") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "strike") == 0)
+	if (Q_strcasecmp(level.mapname, "strike") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "train") == 0)
+	if (Q_strcasecmp(level.mapname, "train") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "ware1") == 0)
+	if (Q_strcasecmp(level.mapname, "ware1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "ware2") == 0)
+	if (Q_strcasecmp(level.mapname, "ware2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "waste1") == 0)
+	if (Q_strcasecmp(level.mapname, "waste1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "waste2") == 0)
+	if (Q_strcasecmp(level.mapname, "waste2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "waste3") == 0)
+	if (Q_strcasecmp(level.mapname, "waste3") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "q2dm1") == 0)
+	if (Q_strcasecmp(level.mapname, "q2dm1") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "q2dm2") == 0)
+	if (Q_strcasecmp(level.mapname, "q2dm2") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "q2dm3") == 0)
+	if (Q_strcasecmp(level.mapname, "q2dm3") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "q2dm4") == 0)
+	if (Q_strcasecmp(level.mapname, "q2dm4") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "q2dm5") == 0)
+	if (Q_strcasecmp(level.mapname, "q2dm5") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "q2dm6") == 0)
+	if (Q_strcasecmp(level.mapname, "q2dm6") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "q2dm7") == 0)
+	if (Q_strcasecmp(level.mapname, "q2dm7") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "q2dm8") == 0)
+	if (Q_strcasecmp(level.mapname, "q2dm8") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "base64") == 0)
+	if (Q_strcasecmp(level.mapname, "base64") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "city64") == 0)
+	if (Q_strcasecmp(level.mapname, "city64") == 0)
 		return true;
-	if (Q_stricmp(level.mapname, "sewer64") == 0)
+	if (Q_strcasecmp(level.mapname, "sewer64") == 0)
 		return true;
 
 	return false;

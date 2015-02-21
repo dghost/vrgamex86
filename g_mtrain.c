@@ -46,7 +46,7 @@ void model_train_animator(edict_t *animator)
 		G_FreeEdict(animator);
 		return;
 	}
-	if(Q_stricmp(train->classname,"model_train"))
+	if(Q_strcasecmp(train->classname,"model_train"))
 	{
 		G_FreeEdict(animator);
 		return;

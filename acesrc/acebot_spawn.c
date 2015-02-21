@@ -557,7 +557,7 @@ void ACESP_SetName(edict_t *bot, char *name, char *skin, char *team)
 	if(strlen(skin) == 0)
 	{	// check if this bot is in the table
 		for (i = 0; i < num_botinfo; i++)
-			if (!Q_stricmp(bot_name, bot_info[i].name))
+			if (!Q_strcasecmp(bot_name, bot_info[i].name))
 			{
 				sprintf(bot_name, "%s", bot_info[i].name); // fix capitalization
 				sprintf(bot_skin, "%s", bot_info[i].skin);
@@ -721,7 +721,7 @@ void ACESP_RemoveBot(char *name)
 		bot = g_edicts + i + 1;
 		if(bot->inuse)
 		{
-			if(bot->is_bot && (Q_stricmp(bot->client->pers.netname,name)==0 || Q_stricmp(name,"all")==0))
+			if(bot->is_bot && (Q_strcasecmp(bot->client->pers.netname,name)==0 || Q_strcasecmp(name,"all")==0))
 			{
 				bot->health = 0;
 				player_die (bot, bot, bot, 100000, vec3_origin);
@@ -733,10 +733,10 @@ void ACESP_RemoveBot(char *name)
 
 				safe_bprintf (PRINT_MEDIUM, "%s removed\n", bot->client->pers.netname);
 				// Knightmare- decrement this bot name's counter and exit loop
-				if (Q_stricmp(name,"all"))
+				if (Q_strcasecmp(name,"all"))
 				{
 					for (j = 0; j < num_botinfo; j++)
-						if (!Q_stricmp(name, bot_info[j].name))
+						if (!Q_strcasecmp(name, bot_info[j].name))
 						{
 							bot_info[j].ingame_count--;
 							bot_info[j].ingame_count = max(bot_info[j].ingame_count, 0);

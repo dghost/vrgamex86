@@ -215,7 +215,7 @@ void crane_light_off(edict_t *light)
 
 void Crane_Move_Done (edict_t *ent)
 {
-	if(!Q_stricmp(ent->classname,"crane_hook"))
+	if(!Q_strcasecmp(ent->classname,"crane_hook"))
 	{
 		edict_t *cable;
 		edict_t *light;

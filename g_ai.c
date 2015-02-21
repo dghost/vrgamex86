@@ -764,7 +764,7 @@ qboolean FindTarget (edict_t *self)
 		return true;	// JDC false;
 
 	// Lazarus: Force idle medics to look for dead monsters
-	if (!self->enemy && !Q_stricmp(self->classname,"monster_medic"))
+	if (!self->enemy && !Q_strcasecmp(self->classname,"monster_medic"))
 	{
 		if(medic_FindDeadMonster(self))
 			return true;
@@ -1565,7 +1565,7 @@ void ai_run (edict_t *self, float dist)
 	//          search time and let him go idle so he'll start tracking hint_paths
 	if (self->monsterinfo.search_time)
 	{
-		if (!Q_stricmp(self->classname,"monster_medic") && hint_chains_exist)
+		if (!Q_strcasecmp(self->classname,"monster_medic") && hint_chains_exist)
 		{
 			if(developer->value)
 				gi.dprintf("medic search_time=%g\n",level.time - self->monsterinfo.search_time);
@@ -1749,7 +1749,7 @@ qboolean ai_chicken (edict_t *self, edict_t *badguy)
 	// If we've already been here, quit
 	if(self->monsterinfo.aiflags & AI_CHICKEN)
 	{
-		if(self->movetarget && !Q_stricmp(self->movetarget->classname,"thing"))
+		if(self->movetarget && !Q_strcasecmp(self->movetarget->classname,"thing"))
 			return true;
 	}
 
