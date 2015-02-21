@@ -196,89 +196,32 @@ field_t clientfields[] = {
 #include "tables/clientfields.h"
 };
 
+int funcsort(const void *func1, const void *func2) {
+    int ret;
+    functionList_t *a = (functionList_t *)func1;
+    functionList_t *b = (functionList_t *)func2;
+    if (a->funcPtr == b->funcPtr)
+        ret = 0;
+    else
+        ret = (a->funcPtr < b->funcPtr) ? -1 : 1;
+    return ret;
+}
+
+
+int mmovesort(const void *mmove1, const void *mmove2) {
+    int ret;
+    mmoveList_t *a = (mmoveList_t *)mmove1;
+    mmoveList_t *b = (mmoveList_t *)mmove2;
+    if (a->mmovePtr == b->mmovePtr)
+        ret = 0;
+    else
+        ret = (a->mmovePtr < b->mmovePtr) ? -1 : 1;
+    return ret;
+}
 
 static uint32_t funcListSize = 0;
 
-void siftFuncDown(functionList_t *list, int32_t start, int32_t end) {
-    int32_t root = start;
-    while (root * 2 + 1 <= end) {
-        int32_t child = root * 2 + 1;
-        int32_t swap = root;
-        if (list[swap].funcPtr < list[child].funcPtr) {
-            swap = child;
-        }
-        if (child +1 <= end && list[swap].funcPtr < list[child+1].funcPtr) {
-            swap = child + 1;
-        }
-        if (swap == root) {
-            return;
-        } else {
-            functionList_t tmp = functionList[root];
-            functionList[root] = functionList[swap];
-            functionList[swap] = tmp;
-            root = swap;
-        }
-    }
-}
-
-void sortFunctionAddresses(void) {
-    funcListSize = sizeof(functionList) / sizeof(functionList[0]) - 1;
-    int32_t start = floor((funcListSize - 2) / 2.0);
-    int32_t end = funcListSize - 1;
-    while (start >= 0) {
-        siftFuncDown(functionList, start, funcListSize - 1);
-        start -= 1;
-    }
-    while (end > 0) {
-        functionList_t tmp = functionList[end];
-        functionList[end] = functionList[0];
-        functionList[0] = tmp;
-        end -= 1;
-        siftFuncDown(functionList, 0, end);
-    }
-}
-
-
 static uint32_t mmoveListSize = 0;
-
-void siftMoveDown(mmoveList_t *list, int32_t start, int32_t end) {
-    int32_t root = start;
-    while (root * 2 + 1 <= end) {
-        int32_t child = root * 2 + 1;
-        int32_t swap = root;
-        if (list[swap].mmovePtr < list[child].mmovePtr) {
-            swap = child;
-        }
-        if (child +1 <= end && list[swap].mmovePtr < list[child+1].mmovePtr) {
-            swap = child + 1;
-        }
-        if (swap == root) {
-            return;
-        } else {
-            mmoveList_t tmp = mmoveList[root];
-            mmoveList[root] = mmoveList[swap];
-            mmoveList[swap] = tmp;
-            root = swap;
-        }
-    }
-}
-
-void sortMoveAddresses(void) {
-    mmoveListSize = (sizeof(mmoveList) / sizeof(mmoveList[0])) - 1;
-    int32_t start = floor((mmoveListSize - 2) / 2.0);
-    int32_t end = mmoveListSize - 1;
-    while (start >= 0) {
-        siftMoveDown(mmoveList, start, mmoveListSize - 1);
-        start -= 1;
-    }
-    while (end > 0) {
-        mmoveList_t tmp = mmoveList[end];
-        mmoveList[end] = mmoveList[0];
-        mmoveList[0] = tmp;
-        end -= 1;
-        siftMoveDown(mmoveList, 0, end);
-    }
-}
 
 /*
 ============
@@ -318,10 +261,12 @@ void InitGame (void)
 #endif
   
     gi.dprintf("Sorting tables...");
-    
-    sortFunctionAddresses();
-    
-    sortMoveAddresses();
+
+    funcListSize = sizeof(functionList) / sizeof(functionList[0]) - 1;
+    qsort(functionList,funcListSize, sizeof(functionList[0]), funcsort);
+
+    mmoveListSize = (sizeof(mmoveList) / sizeof(mmoveList[0])) - 1;
+    qsort(mmoveList,mmoveListSize, sizeof(mmoveList[0]), mmovesort);
     
     gi.dprintf(" Done!\n");
     
