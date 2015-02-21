@@ -110,7 +110,7 @@ void PMenu_UpdateEntry(pmenu_t *entry, const char *text, int align, SelectFunc_t
 {
 	if (entry->text)
 		G_Free(entry->text);
-	entry->text = G_CopyString(text);
+	entry->text = G_CopyString((char *)text);
 	entry->align = align;
 	entry->SelectFunc = SelectFunc;
 }
