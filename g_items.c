@@ -136,13 +136,14 @@ gitem_t	*FindItemByClassname (char *classname)
 {
 	int		i;
 	gitem_t	*it;
+    hash32_t hash = gi.HashSanitized32(classname);
 
 	it = itemlist;
 	for (i=0 ; i<game.num_items ; i++, it++)
 	{
 		if (!it->classname)
 			continue;
-		if (!Q_strcasecmp(it->classname, classname))
+		if (!gi.HashEquals32(hash, it->classHash) && !Q_strcasecmp(it->classname, classname))
 			return it;
 	}
 
@@ -159,13 +160,14 @@ gitem_t	*FindItem (char *pickup_name)
 {
 	int		i;
 	gitem_t	*it;
-
+    hash32_t hash = gi.HashSanitized32(pickup_name);
+    
 	it = itemlist;
 	for (i=0 ; i<game.num_items ; i++, it++)
 	{
 		if (!it->pickup_name)
 			continue;
-		if (!Q_strcasecmp(it->pickup_name, pickup_name))
+		if (!gi.HashEquals32(hash, it->pickupHash) && !Q_strcasecmp(it->pickup_name, pickup_name))
 			return it;
 	}
 
@@ -3151,7 +3153,17 @@ void SP_item_health_mega (edict_t *self)
 
 void InitItems (void)
 {
-	game.num_items = sizeof(itemlist)/sizeof(itemlist[0]) - 1;
+    int		i;
+    gitem_t	*it;
+    game.num_items = sizeof(itemlist)/sizeof(itemlist[0]) - 1;
+    it = itemlist;
+    for (i=0 ; i<game.num_items ; i++, it++)
+    {
+        if (it->classname)
+            it->classHash = gi.HashSanitized32(it->classname);
+        if (it->pickup_name)
+            it->pickupHash = gi.HashSanitized32(it->pickup_name);
+    }
 }
 
 
