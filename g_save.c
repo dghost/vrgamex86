@@ -232,7 +232,6 @@ only happens when a new game is started or a save game
 is loaded.
 ============
 */
-#include <inttypes.h>
 
 
 void InitGame (void)
