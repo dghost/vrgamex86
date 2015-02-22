@@ -246,30 +246,23 @@
     {"common_name", FOFS(common_name), F_LSTRING},
     {"damage_debounce_time", FOFS(damage_debounce_time), F_FLOAT},
     {"endtime", FOFS(endtime), F_FLOAT},
-    {"flash", FOFS(flash), F_EDICT, FFL_NOSPAWN},
     {"fly_sound_debounce_time", FOFS(fly_sound_debounce_time), F_FLOAT},
     {"fog_index", FOFS(fog_index), F_INT},
-    {"from", FOFS(from), F_EDICT, FFL_NOSPAWN}, //Knightmare added
     {"goal_frame", FOFS(goal_frame), F_FLOAT},
     {"gravity_debounce_time", FOFS(gravity_debounce_time), F_FLOAT},
     {"ideal_pitch", FOFS(ideal_pitch), F_FLOAT},
     {"ideal_roll", FOFS(ideal_roll), F_FLOAT},
     {"ideal_yaw", FOFS(ideal_yaw), F_FLOAT},
     {"in_mud", FOFS(in_mud), F_INT},
-    {"key_message", FOFS(key_message), F_LSTRING}, //Knightmare added
     {"last_attacked_framenum", FOFS(last_attacked_framenum), F_INT},
     {"last_move_time", FOFS(last_move_time), F_FLOAT},
     {"leader", FOFS(monsterinfo.leader), F_EDICT},
-    {"move_origin", FOFS(move_origin), F_VECTOR}, //relative angular velocity
     {"movedir", FOFS(movedir), F_VECTOR},
     {"old_leader", FOFS(monsterinfo.old_leader), F_EDICT},
     {"org_angles", FOFS(org_angles), F_VECTOR},
     {"pain_debounce_time", FOFS(pain_debounce_time), F_FLOAT},
     {"play", FOFS(play), F_FUNCTION, FFL_NOSPAWN},
-    {"postthink", FOFS(postthink), F_FUNCTION, FFL_NOSPAWN}, //Knightmare added
-    {"salpha", FOFS(s.alpha), F_FLOAT},
     {"starttime", FOFS(starttime), F_FLOAT},
-    {"to", FOFS(to), F_EDICT, FFL_NOSPAWN}, //Knightmare added
     {"touch_debounce_time", FOFS(touch_debounce_time), F_FLOAT}, //Knightmare added
 
     {0, 0, 0, 0}
