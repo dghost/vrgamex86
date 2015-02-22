@@ -697,6 +697,7 @@ extern	int	hml_index;
 extern	int	meansOfDeath;
 
 extern	edict_t			*g_edicts;
+extern  gclient_t       *g_clients;
 
 #ifdef __GNUC__
 #include <stddef.h>

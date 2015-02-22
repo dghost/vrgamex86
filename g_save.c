@@ -444,7 +444,8 @@ void InitGame (void)
 
 	// initialize all clients for this game
 	game.maxclients = maxclients->value;
-	game.clients = gi.TagMalloc (game.maxclients * sizeof(game.clients[0]), TAG_GAME);
+    g_clients = gi.TagMalloc (game.maxclients * sizeof(game.clients[0]), TAG_GAME);
+    game.clients = g_clients;
 	globals.num_edicts = game.maxclients+1;
 
 //ZOID
@@ -1015,8 +1016,6 @@ ReadGame(const char *filename)
     char str_os[32];
     char str_arch[32];
     
-    gi.FreeTags(TAG_GAME);
-    
     f = fopen(filename, "rb");
     
     if (!f)
@@ -1052,12 +1051,12 @@ ReadGame(const char *filename)
         gi.error("Savegame from an other architecure.\n");
     }
     
-    g_edicts = gi.TagMalloc(game.maxentities * sizeof(g_edicts[0]), TAG_GAME);
+    g_edicts = gi.TagRealloc(g_edicts, game.maxentities * sizeof(g_edicts[0]));
     globals.edicts = g_edicts;
     
     fread(&game, sizeof(game), 1, f);
-    game.clients = gi.TagMalloc(game.maxclients * sizeof(game.clients[0]),
-                                TAG_GAME);
+    g_clients = gi.TagRealloc(g_clients, game.maxclients * sizeof(game.clients[0]));
+    game.clients = g_clients;
     
     for (i = 0; i < game.maxclients; i++)
     {
