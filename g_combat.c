@@ -1081,23 +1081,25 @@ void T_Damage (edict_t *in_targ, edict_t *inflictor, edict_t *in_attacker, vec3_
 			//          damage type
 			if(targ->classname && !Q_strcasecmp(targ->classname,"func_explosive"))
 			{
-				qboolean good_damage = true;
 				// Knightmare- changed spawnflag
 				if(targ->spawnflags & 16)  // explosion only
 				{
-					good_damage = false;
-					if(mod == MOD_GRENADE)     good_damage = true;
-					if(mod == MOD_G_SPLASH)    good_damage = true;
-					if(mod == MOD_ROCKET)      good_damage = true;
-					if(mod == MOD_R_SPLASH)    good_damage = true;
-					if(mod == MOD_BFG_BLAST)   good_damage = true;
-					if(mod == MOD_HANDGRENADE) good_damage = true;
-					if(mod == MOD_HG_SPLASH)   good_damage = true;
-					if(mod == MOD_EXPLOSIVE)   good_damage = true;
-					if(mod == MOD_BARREL)      good_damage = true;
-					if(mod == MOD_BOMB)        good_damage = true;
+                    switch(mod) {
+                        case MOD_GRENADE:
+                        case MOD_G_SPLASH:
+                        case MOD_ROCKET:
+                        case MOD_R_SPLASH:
+                        case MOD_BFG_BLAST:
+                        case MOD_HANDGRENADE:
+                        case MOD_HG_SPLASH:
+                        case MOD_EXPLOSIVE:
+                        case MOD_BARREL:
+                        case MOD_BOMB:
+                            break;
+                        default:
+                            return;
+                    }
 				}
-				if(!good_damage) return;
 			}
 
 			targ->health = targ->health - take;
