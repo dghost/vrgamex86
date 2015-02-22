@@ -581,7 +581,7 @@ void Fog (edict_t *ent) //vec3_t viewpoint)
 	VectorCopy(player->s.origin, viewpoint);
 	viewpoint[2] += ent->viewheight;
 
-	if(stricmp(vid_ref->string,"gl"))
+	if(Q_strcasecmp(vid_ref->string,"gl"))
 	{
 		last_software_frame = level.framenum;
 		level.active_fog = 0;

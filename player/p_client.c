@@ -2954,14 +2954,14 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 			viewing = LookingAt(ent,0,intersect,&range);
 			if(viewing && viewing->classname)
 			{
-				if(!stricmp(viewing->classname,"crane_control") && range <= 100)
+				if(!Q_strcasecmp(viewing->classname,"crane_control") && range <= 100)
 					crane_control_action(viewing,ent,intersect);
-				if(!stricmp(viewing->classname,"target_lock_digit") && range <= 100)
+				if(!Q_strcasecmp(viewing->classname,"target_lock_digit") && range <= 100)
 					lock_digit_increment(viewing,ent);
-				if(!stricmp(viewing->classname,"func_trainbutton") && (viewing->spawnflags & 1) && range <= 64)
+				if(!Q_strcasecmp(viewing->classname,"func_trainbutton") && (viewing->spawnflags & 1) && range <= 64)
 					trainbutton_use(viewing,ent,ent);
 				// Knightmare- different range for chasecam
-				if(!stricmp(viewing->classname,"func_monitor") && ((range <= 100) || (client->chasetoggle && range <= client->zoom + 160.00)) )
+				if(!Q_strcasecmp(viewing->classname,"func_monitor") && ((range <= 100) || (client->chasetoggle && range <= client->zoom + 160.00)) )
 				{
 					use_camera(viewing,ent,ent);
 					if(client->spycam && client->spycam->viewer == ent)
@@ -3081,7 +3081,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 
 		viewing = LookingAt(ent,0,intersect,&range);
 		if ( !(viewing && viewing->classname
-			&& (stricmp(viewing->classname,"func_monitor") || stricmp(viewing->classname,"func_pushable"))
+			&& (Q_strcasecmp(viewing->classname,"func_monitor") || Q_strcasecmp(viewing->classname,"func_pushable"))
 			&& range <= 100) )
 		{
 			if ((ucmd->buttons & BUTTON_USE) && (!deathmatch->value))
