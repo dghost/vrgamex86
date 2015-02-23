@@ -108,9 +108,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define	FRAMETIME		0.1
 
 // memory tags to allow dynamic memory to be cleaned up
-#define	TAG_GAME	765		// clear when unloading the dll
-#define	TAG_LEVEL	766		// clear when loading a new level
-
+#define	TAG_GAME	0x7FFD		// clear when unloading the dll
+#define	TAG_LEVEL	0x7FFE		// clear when loading a new level
 
 #define MELEE_DISTANCE	80
 
