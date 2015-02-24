@@ -1058,34 +1058,38 @@ qboolean SV_Push (edict_t *pusher, vec3_t move, vec3_t amove)
 				}
 				else
 				{
-					if(amove[YAW] != 0.)
-					{
-						check->client->ps.pmove.delta_angles[YAW] += ANGLE2SHORT(amove[YAW]);
-						check->client->ps.viewangles[YAW] += amove[YAW];
+                    float yaw = SHORT2ANGLE(check->client->ps.pmove.delta_angles[YAW]);
+                    check->client->ps.pmove.delta_angles[YAW] = ANGLE2SHORT(yaw + amove[YAW]);
+                    
 
-						// PM_FREEZE makes the turn smooth, even though it will
-						// be turned off by ClientThink in the very next video frame
-						check->client->ps.pmove.pm_type = PM_FREEZE;
-						// PMF_NO_PREDICTION overrides .exe's client physics, which
-						// really doesn't like for us to change player angles. Note
-						// that this isn't strictly necessary, since Lazarus 1.7 and
-						// later automatically turn prediction off (in ClientThink) when 
-						// player is riding a MOVETYPE_PUSH
-						check->client->ps.pmove.pm_flags |= PMF_NO_PREDICTION;
-					}
-					if(amove[PITCH] != 0.)
-					{
-						float	delta_yaw;
-						float	pitch = amove[PITCH];
-
-						delta_yaw = check->s.angles[YAW] - pusher->s.angles[YAW];
-						delta_yaw *= M_PI / 180.;
-						pitch *= cos(delta_yaw);
-						check->client->ps.pmove.delta_angles[PITCH] += ANGLE2SHORT(pitch);
-						check->client->ps.viewangles[PITCH] += pitch;
-						check->client->ps.pmove.pm_type = PM_FREEZE;
-						check->client->ps.pmove.pm_flags |= PMF_NO_PREDICTION;
-					}
+//					if(amove[YAW] != 0.)
+//					{
+//						check->client->ps.pmove.delta_angles[YAW] += ANGLE2SHORT(amove[YAW]);
+//						check->client->ps.viewangles[YAW] += amove[YAW];
+//
+//						// PM_FREEZE makes the turn smooth, even though it will
+//						// be turned off by ClientThink in the very next video frame
+//						check->client->ps.pmove.pm_type = PM_FREEZE;
+//						// PMF_NO_PREDICTION overrides .exe's client physics, which
+//						// really doesn't like for us to change player angles. Note
+//						// that this isn't strictly necessary, since Lazarus 1.7 and
+//						// later automatically turn prediction off (in ClientThink) when 
+//						// player is riding a MOVETYPE_PUSH
+//						check->client->ps.pmove.pm_flags |= PMF_NO_PREDICTION;
+//					}
+//					if(amove[PITCH] != 0.)
+//					{
+//						float	delta_yaw;
+//						float	pitch = amove[PITCH];
+//
+//						delta_yaw = check->s.angles[YAW] - pusher->s.angles[YAW];
+//						delta_yaw *= M_PI / 180.;
+//						pitch *= cos(delta_yaw);
+//						check->client->ps.pmove.delta_angles[PITCH] += ANGLE2SHORT(pitch);
+//						check->client->ps.viewangles[PITCH] += pitch;
+//						check->client->ps.pmove.pm_type = PM_FREEZE;
+//						check->client->ps.pmove.pm_flags |= PMF_NO_PREDICTION;
+//					}
 				}
 			}
 
