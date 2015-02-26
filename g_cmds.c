@@ -483,9 +483,6 @@ char *ClientTeam (edict_t *ent)
 
 qboolean OnSameTeam (edict_t *ent1, edict_t *ent2)
 {
-	char	ent1Team [512];
-	char	ent2Team [512];
-
 	if (!ent1->client || !ent2->client) // Knightmare added
 		return false;
 
@@ -495,10 +492,7 @@ qboolean OnSameTeam (edict_t *ent1, edict_t *ent2)
 	if (!((int)(dmflags->value) & (DF_MODELTEAMS | DF_SKINTEAMS)))
 		return false;
 
-	strcpy (ent1Team, ClientTeam (ent1));
-	strcpy (ent2Team, ClientTeam (ent2));
-
-	if (strcmp(ent1Team, ent2Team) == 0)
+	if (strcmp(ClientTeam (ent1), ClientTeam (ent2)) == 0)
 		return true;
 	return false;
 }
