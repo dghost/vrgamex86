@@ -393,7 +393,6 @@ struct fog_s
 	float		Density1;
 	float		Density2;
 	vec3_t		Dir;
-	int			GL_Model;
 	vec3_t		Color;
 	edict_t		*ent;
 };
