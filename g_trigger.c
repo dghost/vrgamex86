@@ -979,10 +979,10 @@ void trigger_scales_think (edict_t *self)
 			if (!e->count)
 				continue;
 			num = e->count;
-			if(weight < pow(10,num-1))
+			if(weight < pow(10.0,num-1))
 				e->s.frame = 12;
 			else
-				e->s.frame = ( weight % (int)pow(10,num) ) / ( pow(10,num-1) );
+				e->s.frame = ( weight % (int)pow(10.0,num) ) / ( pow(10.0,num-1) );
 		}
 	}
 	self->nextthink = level.time + FRAMETIME;
@@ -1607,11 +1607,11 @@ int trigger_transition_ents (edict_t *changelevel, edict_t *self)
 			edict_t	*e;
 
 			e = G_Spawn();
-			e->classname = gi.TagMalloc(17,TAG_LEVEL);
+			e->classname = (char*)gi.TagMalloc(17,TAG_LEVEL);
 			strcpy(e->classname,"info_train_start");
-			e->targetname = gi.TagMalloc(strlen(ent->targetname)+1,TAG_LEVEL);
+			e->targetname = (char*)gi.TagMalloc(strlen(ent->targetname)+1,TAG_LEVEL);
 			strcpy(e->targetname,ent->targetname);
-			e->target = gi.TagMalloc(strlen(ent->target)+1,TAG_LEVEL);
+			e->target = (char*)gi.TagMalloc(strlen(ent->target)+1,TAG_LEVEL);
 			strcpy(e->target,ent->target);
 			e->spawnflags = ent->spawnflags;
 			VectorCopy(ent->s.origin,e->s.origin);

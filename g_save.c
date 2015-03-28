@@ -438,13 +438,13 @@ void InitGame (void)
 
 	// initialize all entities for this game
 	game.maxentities = maxentities->value;
-	g_edicts =  gi.TagMalloc (game.maxentities * sizeof(g_edicts[0]), TAG_GAME);
+	g_edicts =  (edict_t*)gi.TagMalloc (game.maxentities * sizeof(g_edicts[0]), TAG_GAME);
 	globals.edicts = g_edicts;
 	globals.max_edicts = game.maxentities;
 
 	// initialize all clients for this game
 	game.maxclients = maxclients->value;
-    g_clients = gi.TagMalloc (game.maxclients * sizeof(game.clients[0]), TAG_GAME);
+    g_clients = (gclient_t*)gi.TagMalloc (game.maxclients * sizeof(game.clients[0]), TAG_GAME);
     game.clients = g_clients;
 	globals.num_edicts = game.maxclients+1;
 
@@ -599,7 +599,7 @@ WriteField1(FILE *f, field_t *field, byte *base)
             
             if (*(char **)p)
             {
-                len = strlen(*(char **)p) + 1;
+                len = (int)strlen(*(char **)p) + 1;
             }
             else
             {
@@ -662,7 +662,7 @@ WriteField1(FILE *f, field_t *field, byte *base)
                     gi.error ("WriteField1: function not in list, can't save game");
                 }
                 
-                len = strlen(func->funcStr)+1;
+                len = (int)strlen(func->funcStr)+1;
             }
             
             *(int *)p = len;
@@ -682,7 +682,7 @@ WriteField1(FILE *f, field_t *field, byte *base)
                     gi.error ("WriteField1: mmove not in list, can't save game");
                 }
                 
-                len = strlen(mmove->mmoveStr)+1;
+                len = (int)strlen(mmove->mmoveStr)+1;
             }
             
             *(int *)p = len;
@@ -713,7 +713,7 @@ WriteField2(FILE *f, field_t *field, byte *base)
             
             if (*(char **)p)
             {
-                len = strlen(*(char **)p) + 1;
+                len = (int)strlen(*(char **)p) + 1;
                 fwrite(*(char **)p, len, 1, f);
             }
             
@@ -729,7 +729,7 @@ WriteField2(FILE *f, field_t *field, byte *base)
                     gi.error ("WriteField2: function not in list, can't save game");
                 }
                 
-                len = strlen(func->funcStr)+1;
+                len = (int)strlen(func->funcStr)+1;
                 fwrite (func->funcStr, len, 1, f);
             }
             
@@ -744,7 +744,7 @@ WriteField2(FILE *f, field_t *field, byte *base)
                     gi.error ("WriteField2: mmove not in list, can't save game");
                 }
                 
-                len = strlen(mmove->mmoveStr)+1;
+                len = (int)strlen(mmove->mmoveStr)+1;
                 fwrite (mmove->mmoveStr, len, 1, f);
             }
             
@@ -796,7 +796,7 @@ ReadField(FILE *f, field_t *field, byte *base)
             }
             else
             {
-                *(char **)p = gi.TagMalloc(32 + len, TAG_LEVEL);
+                *(char **)p = (char*)gi.TagMalloc(32 + len, TAG_LEVEL);
                 fread(*(char **)p, len, 1, f);
             }
             
@@ -1051,11 +1051,11 @@ ReadGame(const char *filename)
         gi.error("Savegame from an other architecure.\n");
     }
     
-    g_edicts = gi.TagRealloc(g_edicts, game.maxentities * sizeof(g_edicts[0]));
+    g_edicts = (edict_t*)gi.TagRealloc(g_edicts, game.maxentities * sizeof(g_edicts[0]));
     globals.edicts = g_edicts;
     
     fread(&game, sizeof(game), 1, f);
-    g_clients = gi.TagRealloc(g_clients, game.maxclients * sizeof(game.clients[0]));
+    g_clients = (gclient_t*)gi.TagRealloc(g_clients, game.maxclients * sizeof(game.clients[0]));
     game.clients = g_clients;
     
     for (i = 0; i < game.maxclients; i++)

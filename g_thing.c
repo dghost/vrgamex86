@@ -28,7 +28,7 @@ edict_t *SpawnThing()
 {
 	edict_t	*thing;
 	thing = G_Spawn();
-	thing->classname = gi.TagMalloc(6,TAG_LEVEL);
+	thing->classname = (char*)gi.TagMalloc(6,TAG_LEVEL);
 	strcpy(thing->classname,"thing");
 	return thing;
 }

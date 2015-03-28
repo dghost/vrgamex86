@@ -1970,7 +1970,7 @@ void SP_func_tracktrain (edict_t *self)
 	{
 		if(self->sounds > 9)
 			self->sounds = 9;
-		self->source = gi.TagMalloc(10,TAG_LEVEL);
+		self->source = (char*)gi.TagMalloc(10,TAG_LEVEL);
 		sprintf(self->source,"train/%d/",self->sounds);
 		gi.soundindex(va("%sspeed1.wav",self->source));
 		gi.soundindex(va("%sspeed2.wav",self->source));
@@ -2030,7 +2030,7 @@ void find_tracktrain (edict_t *self)
 	train->sounds = self->sounds;
 	if(train->sounds > 0)
 	{
-		train->source = gi.TagMalloc(10,TAG_LEVEL);
+		train->source = (char*)gi.TagMalloc(10,TAG_LEVEL);
 		sprintf(train->source,"train/%d/",train->sounds);
 	}
 	if(train->moveinfo.state && (train->sounds > 0)) {

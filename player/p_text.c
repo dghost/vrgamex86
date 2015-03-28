@@ -253,7 +253,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 	qboolean	linebreak;
 	qboolean	do_linebreaks;
 
-	hnd = G_Malloc(sizeof(*hnd));
+	hnd = (texthnd_t*)G_Malloc(sizeof(*hnd));
 	// If a file, open and read it
 	if(flags & 1)
 	{
@@ -271,7 +271,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			return;
 		}
 		hnd->allocated = textsize + 128; // add some slop for additional control characters
-		hnd->buffer = G_Malloc(hnd->allocated);
+		hnd->buffer = (byte*)G_Malloc(hnd->allocated);
 		if(!hnd->buffer)
 		{
 			gi.dprintf("Memory allocation failure on target_text\n");
@@ -383,7 +383,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 	{
 		L = strlen(message);
 		hnd->allocated = L+128;
-		hnd->buffer = G_Malloc(hnd->allocated);
+		hnd->buffer = (byte*)G_Malloc(hnd->allocated);
 		if(!hnd->buffer)
 		{
 			gi.dprintf("Memory allocation failure\n");
@@ -534,7 +534,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 					if(hnd->size >= hnd->allocated) {
 						hnd->allocated += 128;
 						temp_buffer = hnd->buffer;
-						hnd->buffer = G_Malloc(hnd->allocated);
+						hnd->buffer = (byte*)G_Malloc(hnd->allocated);
 						if(!hnd->buffer)
 						{
 							gi.dprintf("Memory allocation failure\n");
@@ -570,7 +570,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			if(hnd->size > hnd->allocated) {
 				hnd->allocated += 128;
 				temp_buffer = hnd->buffer;
-				hnd->buffer = G_Malloc(hnd->allocated);
+				hnd->buffer = (byte*)G_Malloc(hnd->allocated);
 				if(!hnd->buffer)
 				{
 					gi.dprintf("Memory allocation failure\n");
@@ -600,7 +600,7 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 			if(hnd->size > hnd->allocated) {
 				hnd->allocated += 128;
 				temp_buffer = hnd->buffer;
-				hnd->buffer = G_Malloc(hnd->allocated);
+				hnd->buffer = (byte*)G_Malloc(hnd->allocated);
 				if(!hnd->buffer)
 				{
 					gi.dprintf("Memory allocation failure\n");

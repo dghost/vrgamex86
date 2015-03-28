@@ -1551,9 +1551,9 @@ void SV_Physics_Toss (edict_t *ent)
 	if(ent->movetype != MOVETYPE_RAIN)
 	{
 		// check for water transition
-		wasinwater = (ent->watertype & MASK_WATER);
+		wasinwater = (ent->watertype & MASK_WATER) != 0 ? true : false;
 		ent->watertype = gi.pointcontents (ent->s.origin);
-		isinwater = ent->watertype & MASK_WATER;
+		isinwater = (ent->watertype & MASK_WATER) != 0 ? true : false;
 
 		if (isinwater)
 			ent->waterlevel = 1;
@@ -2555,9 +2555,9 @@ void SV_Physics_Debris (edict_t *ent)
 	}
 	
 // check for water transition
-	wasinwater = (ent->watertype & MASK_WATER);
+	wasinwater = (ent->watertype & MASK_WATER) != 0 ? true : false;
 	ent->watertype = gi.pointcontents (ent->s.origin);
-	isinwater = ent->watertype & MASK_WATER;
+	isinwater = (ent->watertype & MASK_WATER) != 0 ? true : false;
 
 	if (isinwater)
 		ent->waterlevel = 1;

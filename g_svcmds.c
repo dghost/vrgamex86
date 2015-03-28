@@ -121,7 +121,7 @@ static qboolean StringToFilter (char *s, ipfilter_t *f)
 SV_FilterPacket
 =================
 */
-qboolean SV_FilterPacket (char *from)
+int SV_FilterPacket (char *from)
 {
 	int		i;
 	uint32_t	in;

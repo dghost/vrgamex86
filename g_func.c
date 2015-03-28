@@ -332,7 +332,7 @@ void train_spline (edict_t *self)
 	if ((!train->from) || (!train->from->inuse) || (!train->to) || (!train->to->inuse))
 		return;
 	//Knightmare- check for removed spline flag- get da hell outta here
-	if (!train->spawnflags & TRAIN_SPLINE)
+	if ((train->spawnflags & TRAIN_SPLINE) == 0)
 	{
 		self->think = train_children_think;
 		return;
@@ -2510,7 +2510,7 @@ void train_wait (edict_t *self)
 			train_next (self);
 			self->spawnflags &= ~TRAIN_START_ON;
 			VectorClear (self->velocity);
-			if (!self->spawnflags & TRAIN_ROTATE_CONSTANT)
+			if ((self->spawnflags & TRAIN_ROTATE_CONSTANT) == 0)
 				VectorClear (self->avelocity); //Knightmare added
 			// Lazarus: turn off animation for stationary trains
 			if (!strcmp(self->classname, "func_train"))

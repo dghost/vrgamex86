@@ -751,10 +751,10 @@ qboolean check_jump_blocked (edict_t *monster, float jumpDist, float downLimit, 
 ===============================================
 */
 
-float realrange (edict_t *this, edict_t *that)
+float realrange (edict_t *this_one, edict_t *that)
 {
 	vec3_t offset;
-	VectorSubtract (this->s.origin, that->s.origin, offset);
+	VectorSubtract (this_one->s.origin, that->s.origin, offset);
 	return VectorLength(offset);
 }
 

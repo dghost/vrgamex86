@@ -2569,7 +2569,7 @@ void ClientCommand (edict_t *ent)
 				return;
 			}
 			e = G_Spawn();
-			e->classname = gi.TagMalloc(strlen(parm)+1,TAG_LEVEL);
+			e->classname = (char*)gi.TagMalloc(strlen(parm)+1,TAG_LEVEL);
 			strcpy(e->classname,parm);
 			AngleVectors(ent->client->v_angle,forward,NULL,NULL);
 			VectorMA(ent->s.origin,128,forward,e->s.origin);
@@ -2587,7 +2587,7 @@ void ClientCommand (edict_t *ent)
 				return;
 			}
 			e = G_Spawn();
-			e->classname = gi.TagMalloc(12,TAG_LEVEL);
+			e->classname = (char*)gi.TagMalloc(12,TAG_LEVEL);
 			strcpy(e->classname,"misc_actor");
 			e->usermodel = gi.argv(1);
 			e->sounds = atoi(gi.argv(2));
