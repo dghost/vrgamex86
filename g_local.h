@@ -45,8 +45,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "km_cvar.h"
 #define JETPACK_MOD
 
-#include <basetsd.h>
-
 // the "gameversion" client command will print this plus compile date
 #define	GAMEVERSION	"lazarus"
 
@@ -708,10 +706,10 @@ extern  gclient_t       *g_clients;
 #define LLOFS(x) offsetof(level_locals_t, x)
 #define CLOFS(x) offsetof(gclient_t, x)
 #else
-#define	FOFS(x) (INT_PTR)&(((edict_t *)0)->x)
-#define	STOFS(x) (INT_PTR)&(((spawn_temp_t *)0)->x)
-#define	LLOFS(x) (INT_PTR)&(((level_locals_t *)0)->x)
-#define	CLOFS(x) (INT_PTR)&(((gclient_t *)0)->x)
+#define	FOFS(x) (intptr_t)&(((edict_t *)0)->x)
+#define	STOFS(x) (intptr_t)&(((spawn_temp_t *)0)->x)
+#define	LLOFS(x) (intptr_t)&(((level_locals_t *)0)->x)
+#define	CLOFS(x) (intptr_t)&(((gclient_t *)0)->x)
 #endif
 
 #define random()	((rand () & 0x7fff) / ((float)0x7fff))
