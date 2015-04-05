@@ -135,7 +135,7 @@ int PatchPlayerModels (char *modelname)
 	fread (&model, sizeof (dmdl_t), 1, infile);
 	
 	datasize = model.ofs_end - model.ofs_skins;
-	if ( !(data = G_Malloc (datasize)) )	// make sure freed locally
+	if ( !(data = (byte*)G_Malloc (datasize)) )	// make sure freed locally
 	{
 		gi.dprintf ("PatchPlayerModels: Could not allocate memory for model\n");
 		return 0;

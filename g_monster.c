@@ -706,7 +706,7 @@ qboolean monster_start (edict_t *self)
 	if (self->spawnflags & SF_MONSTER_GOODGUY) {
 		self->monsterinfo.aiflags |= AI_GOOD_GUY;
 		if(!self->dmgteam) {
-			self->dmgteam = gi.TagMalloc(8*sizeof(char), TAG_LEVEL);
+			self->dmgteam = (char*)gi.TagMalloc(8*sizeof(char), TAG_LEVEL);
 			strcpy(self->dmgteam,"player");
 		}
 	}
@@ -1238,7 +1238,7 @@ int PatchMonsterModel (char *modelname)
 				fseek(fpak,pakitem.start,SEEK_SET);
 				fread(&model, sizeof(dmdl_t), 1, fpak);
 				datasize = model.ofs_end - model.ofs_skins;
-				if ( !(data = G_Malloc (datasize)) )	// make sure freed locally
+				if ( !(data = (byte*)G_Malloc (datasize)) )	// make sure freed locally
 				{
 					fclose(fpak);
 					gi.dprintf ("PatchMonsterModel: Could not allocate memory for model\n");
@@ -1259,7 +1259,7 @@ int PatchMonsterModel (char *modelname)
 		fread (&model, sizeof (dmdl_t), 1, infile);
 	
 		datasize = model.ofs_end - model.ofs_skins;
-		if ( !(data = G_Malloc (datasize)) )	// make sure freed locally
+		if ( !(data = (byte*)G_Malloc (datasize)) )	// make sure freed locally
 		{
 			gi.dprintf ("PatchMonsterModel: Could not allocate memory for model\n");
 			return 0;

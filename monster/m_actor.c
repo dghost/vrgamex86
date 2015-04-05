@@ -146,7 +146,7 @@ mframe_t actor_frames_walk [] =
 };
 mmove_t actor_move_walk = {FRAME_run1, FRAME_run6, actor_frames_walk, NULL};
 
-mmove_t actor_move_run;
+//mmove_t actor_move_run;
 void actor_walk (edict_t *self)
 {
 	// prevent foolishness:
@@ -1158,7 +1158,7 @@ qboolean actor_checkattack (edict_t *self)
 	return false;
 }
 
-mmove_t actor_move_jump;
+//mmove_t actor_move_jump;
 void actor_end_jump (edict_t *self)
 {
 	if(self->flags & FL_ROBOT)
@@ -1278,7 +1278,7 @@ void SP_misc_actor (edict_t *self)
 		if(p) *p = 0;
 	}
 	else {
-		self->usermodel = G_Malloc(5);
+		self->usermodel = (char*)G_Malloc(5);
 		strcpy(self->usermodel,"male");
 	}
 	if( (!Q_strcasecmp(self->usermodel,"male")) ||

@@ -706,10 +706,10 @@ extern  gclient_t       *g_clients;
 #define LLOFS(x) offsetof(level_locals_t, x)
 #define CLOFS(x) offsetof(gclient_t, x)
 #else
-#define	FOFS(x) (int)&(((edict_t *)0)->x)
-#define	STOFS(x) (int)&(((spawn_temp_t *)0)->x)
-#define	LLOFS(x) (int)&(((level_locals_t *)0)->x)
-#define	CLOFS(x) (int)&(((gclient_t *)0)->x)
+#define	FOFS(x) (intptr_t)&(((edict_t *)0)->x)
+#define	STOFS(x) (intptr_t)&(((spawn_temp_t *)0)->x)
+#define	LLOFS(x) (intptr_t)&(((level_locals_t *)0)->x)
+#define	CLOFS(x) (intptr_t)&(((gclient_t *)0)->x)
 #endif
 
 #define random()	((rand () & 0x7fff) / ((float)0x7fff))
@@ -1123,7 +1123,7 @@ void Hud_Off();
 // g_svcmds.c
 //
 void	ServerCommand (void);
-qboolean SV_FilterPacket (char *from);
+int SV_FilterPacket (char *from);
 //
 // g_thing.c
 //
@@ -1326,7 +1326,7 @@ void hintpath_stop (edict_t *monster);
 qboolean hintcheck_monsterlost (edict_t *monster);
 void SetupHintPaths (void);
 
-float realrange (edict_t *this, edict_t *that);
+float realrange (edict_t *this_one, edict_t *that);
 qboolean has_valid_enemy (edict_t *monster);
 
 //============================================================================
@@ -1721,7 +1721,7 @@ struct edict_s
 	int			max_health;
 	int			gib_health;
 	int			deadflag;
-	qboolean	show_hostile;
+	int			show_hostile;
 
 	// Lazarus: health2 and mass2 are passed from jorg to makron health and mass
 	int			health2;

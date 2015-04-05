@@ -265,6 +265,6 @@
     {"starttime", FOFS(starttime), F_FLOAT},
     {"touch_debounce_time", FOFS(touch_debounce_time), F_FLOAT}, //Knightmare added
 
-    {0, 0, 0, 0}
+    {0, 0, (fieldtype_t)0, 0}
 
 

@@ -229,7 +229,7 @@ void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 
 	if (deathmatch->value || coop->value || !deathmatch->value)
 	{
-		ff = meansOfDeath & MOD_FRIENDLY_FIRE;
+		ff = (meansOfDeath & MOD_FRIENDLY_FIRE) != 0 ? true : false;
 		mod = meansOfDeath & ~MOD_FRIENDLY_FIRE;
 		message = NULL;
 		message2 = "";
@@ -2452,8 +2452,8 @@ float PM_CmdScale( usercmd_t *cmd ) {
 		return 0;
 	}
 
-	total = sqrt( cmd->forwardmove * cmd->forwardmove
-		+ cmd->sidemove * cmd->sidemove + cmd->upmove * cmd->upmove );
+	total = sqrt( (float)(cmd->forwardmove * cmd->forwardmove
+		+ cmd->sidemove * cmd->sidemove + cmd->upmove * cmd->upmove) );
 	scale = max / total;
 
 	return scale;
@@ -3430,7 +3430,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 
 //ZOID
 	if (client->ctf_grapple)
-		CTFGrapplePull(client->ctf_grapple);
+		CTFGrapplePull((edict_t*)client->ctf_grapple);
 //ZOID
 
 		gi.linkentity (ent);

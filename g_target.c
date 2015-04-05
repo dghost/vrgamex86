@@ -134,12 +134,12 @@ void SP_target_speaker (edict_t *ent)
 		//      via trigger_transition
 		if (!strstr (st.noise, ".wav"))
 		{
-			ent->message = gi.TagMalloc(strlen(st.noise)+5,TAG_LEVEL);
+			ent->message = (char*)gi.TagMalloc(strlen(st.noise)+5,TAG_LEVEL);
 			sprintf(ent->message,"%s.wav", st.noise);
 		}
 		else
 		{
-			ent->message = gi.TagMalloc(strlen(st.noise)+1,TAG_LEVEL);
+			ent->message = (char*)gi.TagMalloc(strlen(st.noise)+1,TAG_LEVEL);
 			strcpy(ent->message,st.noise);
 		}
 	}
@@ -3524,7 +3524,7 @@ void SP_target_animation (edict_t *self)
 			self->framenumbers = 1;
 	}
 	self->use = target_animation_use;
-	move = gi.TagMalloc(sizeof(mmove_t), TAG_LEVEL);
+	move = (mmove_t*)gi.TagMalloc(sizeof(mmove_t), TAG_LEVEL);
 	self->monsterinfo.currentmove = move;
 }
 
@@ -4000,7 +4000,7 @@ void SP_target_sky (edict_t *self)
 		G_FreeEdict(self);
 		return;
 	}
-	self->pathtarget = gi.TagMalloc(strlen(st.sky)+1,TAG_LEVEL);
+	self->pathtarget = (char*)gi.TagMalloc(strlen(st.sky)+1,TAG_LEVEL);
 	strcpy(self->pathtarget,st.sky);
 	self->use = use_target_sky;
 }
@@ -4073,7 +4073,7 @@ void clone (edict_t *self, edict_t *other, edict_t *activator)
 	if(!parent)
 		return;
 	child = G_Spawn();
-	child->classname = gi.TagMalloc(strlen(parent->classname)+1,TAG_LEVEL);
+	child->classname = (char*)gi.TagMalloc(strlen(parent->classname)+1,TAG_LEVEL);
 	strcpy(child->classname,parent->classname);
 	child->s.modelindex = parent->s.modelindex;
 	VectorCopy(self->s.origin,child->s.origin);
