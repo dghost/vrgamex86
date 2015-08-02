@@ -1,6 +1,7 @@
 set(GAME_SOURCES
     ../qcommon/shared/m_flash.c
     ../qcommon/shared/q_shared.c
+    ../qcommon/murmur3/murmur3.c
     acesrc/acebot_ai.c
     acesrc/acebot_cmds.c
     acesrc/acebot_compress.c

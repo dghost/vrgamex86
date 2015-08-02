@@ -214,8 +214,13 @@ and global variables
 EXPORT game_export_t *GetGameAPI (game_import_t *import)
 {
 	gi = *import;
-
+    
+#ifdef Q2VR_ENGINE_MOD
 	globals.apiversion = GAME_API_VERSION;
+#else
+    globals.apiversion = LEGACY_API_VERSION;
+#endif
+    
 	globals.Init = InitGame;
 	globals.Shutdown = ShutdownGame;
 	globals.SpawnEntities = SpawnEntities;

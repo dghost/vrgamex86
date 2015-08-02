@@ -104,7 +104,7 @@
 #if (defined _M_IX86 || defined __i386__)
 #define ARCH "x86"
 #elif defined(_M_X64) || defined(__x86_64__)
-#define ARCH "x86-64"
+#define ARCH "x64"
 #else
 #define ARCH "unknown"
 #endif
@@ -237,12 +237,12 @@ void InitGame (void)
         
         for (i = 0; mmoveList[i].mmoveStr; i++)
         {
-            mmoveList[i].mmoveHash = gi.Hash32(mmoveList[i].mmoveStr, strlen(mmoveList[i].mmoveStr));
+            mmoveList[i].mmoveHash = Hash32(mmoveList[i].mmoveStr, strlen(mmoveList[i].mmoveStr));
         }
         
         for (i = 0; functionList[i].funcStr; i++)
         {
-            functionList[i].funcHash = gi.Hash32(functionList[i].funcStr, strlen(functionList[i].funcStr));
+            functionList[i].funcHash = Hash32(functionList[i].funcStr, strlen(functionList[i].funcStr));
         }
         
         gi.dprintf(" Done!\n");
@@ -482,12 +482,12 @@ FindFunctionByName(char *name)
 {
     int i;
 #ifdef Q2VR_ENGINE_MOD
-    hash32_t nameHash = gi.Hash32(name, strlen(name));
+    hash32_t nameHash = Hash32(name, strlen(name));
 #endif
     for (i = 0; functionList[i].funcStr; i++)
     {
 #ifdef Q2VR_ENGINE_MOD
-        if (!gi.HashCompare32(nameHash, functionList[i].funcHash) && !strcmp(name, functionList[i].funcStr))
+        if (!HashCompare32(nameHash, functionList[i].funcHash) && !strcmp(name, functionList[i].funcStr))
 #else
         if (!strcmp(name, functionList[i].funcStr))
 #endif
@@ -533,12 +533,12 @@ FindMmoveByName(char *name)
 {
     int i;
 #ifdef Q2VR_ENGINE_MOD
-    hash32_t nameHash = gi.Hash32(name, strlen(name));
+    hash32_t nameHash = Hash32(name, strlen(name));
 #endif
     for (i = 0; mmoveList[i].mmoveStr; i++)
     {
 #ifdef Q2VR_ENGINE_MOD
-        if (!gi.HashCompare32(nameHash, mmoveList[i].mmoveHash) && !strcmp(name, mmoveList[i].mmoveStr))
+        if (!HashCompare32(nameHash, mmoveList[i].mmoveHash) && !strcmp(name, mmoveList[i].mmoveStr))
 #else
         if (!strcmp(name, mmoveList[i].mmoveStr))
 #endif

@@ -136,14 +136,14 @@ gitem_t	*FindItemByClassname (char *classname)
 {
 	int		i;
 	gitem_t	*it;
-    hash32_t hash = gi.HashSanitized32(classname);
+    hash32_t hash = HashSanitized32(classname);
 
 	it = itemlist;
 	for (i=0 ; i<game.num_items ; i++, it++)
 	{
 		if (!it->classname)
 			continue;
-		if (!gi.HashEquals32(hash, it->classHash) && !Q_strcasecmp(it->classname, classname))
+		if (!HashEquals32(hash, it->classHash) && !Q_strcasecmp(it->classname, classname))
 			return it;
 	}
 
@@ -160,14 +160,14 @@ gitem_t	*FindItem (char *pickup_name)
 {
 	int		i;
 	gitem_t	*it;
-    hash32_t hash = gi.HashSanitized32(pickup_name);
+    hash32_t hash = HashSanitized32(pickup_name);
     
 	it = itemlist;
 	for (i=0 ; i<game.num_items ; i++, it++)
 	{
 		if (!it->pickup_name)
 			continue;
-		if (!gi.HashEquals32(hash, it->pickupHash) && !Q_strcasecmp(it->pickup_name, pickup_name))
+		if (!HashEquals32(hash, it->pickupHash) && !Q_strcasecmp(it->pickup_name, pickup_name))
 			return it;
 	}
 
@@ -3160,9 +3160,9 @@ void InitItems (void)
     for (i=0 ; i<game.num_items ; i++, it++)
     {
         if (it->classname)
-            it->classHash = gi.HashSanitized32(it->classname);
+            it->classHash = HashSanitized32(it->classname);
         if (it->pickup_name)
-            it->pickupHash = gi.HashSanitized32(it->pickup_name);
+            it->pickupHash = HashSanitized32(it->pickup_name);
     }
 }
 
