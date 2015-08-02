@@ -1041,12 +1041,23 @@ ReadGame(const char *filename)
         gi.error("Savegame from an other architecure.\n");
     }
     
-    g_edicts = (edict_t*)gi.TagRealloc(g_edicts, game.maxentities * sizeof(g_edicts[0]));
-    globals.edicts = g_edicts;
-    
     fread(&game, sizeof(game), 1, f);
-    g_clients = (gclient_t*)gi.TagRealloc(g_clients, game.maxclients * sizeof(game.clients[0]));
+    
+#ifdef Q2VR_ENGINE_MOD
+    g_edicts = gi.TagRealloc(g_edicts, game.maxentities * sizeof(g_edicts[0]));
+    g_clients = gi.TagRealloc(g_clients, game.maxclients * sizeof(game.clients[0]));
+#else
+    if (g_edicts)
+        gi.TagFree(g_edicts);
+    if (g_clients)
+        gi.TagFree(g_clients);
+    g_edicts = gi.TagMalloc(game.maxentities * sizeof(g_edicts[0]), TAG_GAME);
+    g_clients = gi.TagMalloc(game.maxentities * sizeof(game.clients[0]), TAG_GAME);
+#endif
+    
+    globals.edicts = g_edicts;
     game.clients = g_clients;
+
     
     for (i = 0; i < game.maxclients; i++)
     {

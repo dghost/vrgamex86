@@ -242,7 +242,7 @@ void Text_Prev(edict_t *ent)
 
 void Do_Text_Display(edict_t *activator, int flags, char *message)
 {
-	int			/*i,*/ L;
+	int			L;
 	byte		*p1, *p2, *p3;
 	char		sound[64];
 	texthnd_t	*hnd;
@@ -292,7 +292,8 @@ void Do_Text_Display(edict_t *activator, int flags, char *message)
 		FILE			*f;
 		pak_header_t	pakheader;
 		pak_item_t		pakitem;
-		
+		int i;
+        
 		basedir = gi.cvar("basedir", "", 0);
 		gamedir = gi.cvar("gamedir", "", 0);
 		strcpy(filename,basedir->string);
