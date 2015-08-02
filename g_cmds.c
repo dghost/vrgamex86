@@ -1313,11 +1313,7 @@ int PlayerSort (void const *a, void const *b)
 	anum = game.clients[anum].ps.stats[STAT_FRAGS];
 	bnum = game.clients[bnum].ps.stats[STAT_FRAGS];
 
-	if (anum < bnum)
-		return -1;
-	if (anum > bnum)
-		return 1;
-	return 0;
+	return anum - bnum;
 }
 
 /*

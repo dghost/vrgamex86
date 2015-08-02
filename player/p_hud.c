@@ -430,7 +430,9 @@ void WhatIsIt (edict_t *ent)
 	edict_t		*touch[MAX_EDICTS];
 	edict_t	    *who, *best;
 	trace_t     tr;
-	vec3_t      dir, end, entp, forward, mins, maxs, start, viewp;
+	vec3_t      dir, end, entp, forward, start, viewp;
+    vec3_t      mins = { -4096, -4096, -4096 };
+    vec3_t      maxs = { 4096, 4096, 4096 };
 
 	/* Check for looking directly at a player or other non-trigger entity */
 	VectorCopy(ent->s.origin, start);
@@ -451,9 +453,8 @@ void WhatIsIt (edict_t *ent)
 	VectorCopy(ent->s.origin,viewp);
 	viewp[2] += ent->viewheight;
 	AngleVectors(ent->client->v_angle, forward, NULL, NULL);
-	VectorSet(mins,-4096,-4096,-4096);
-	VectorSet(maxs, 4096, 4096, 4096);
-	num = gi.BoxEdicts (mins, maxs, touch, MAX_EDICTS, AREA_TRIGGERS);
+
+    num = gi.BoxEdicts (mins, maxs, touch, MAX_EDICTS, AREA_TRIGGERS);
 	best = NULL;
 	for (i=0 ; i<num ; i++)
 	{

@@ -197,26 +197,16 @@ field_t clientfields[] = {
 };
 
 int funcsort(const void *func1, const void *func2) {
-    int ret;
     functionList_t *a = (functionList_t *)func1;
     functionList_t *b = (functionList_t *)func2;
-    if (a->funcPtr == b->funcPtr)
-        ret = 0;
-    else
-        ret = (a->funcPtr < b->funcPtr) ? -1 : 1;
-    return ret;
+    return a->funcPtr - b->funcPtr;
 }
 
 
 int mmovesort(const void *mmove1, const void *mmove2) {
-    int ret;
     mmoveList_t *a = (mmoveList_t *)mmove1;
     mmoveList_t *b = (mmoveList_t *)mmove2;
-    if (a->mmovePtr == b->mmovePtr)
-        ret = 0;
-    else
-        ret = (a->mmovePtr < b->mmovePtr) ? -1 : 1;
-    return ret;
+    return a->mmovePtr - b->mmovePtr;
 }
 
 static uint32_t funcListSize = 0;

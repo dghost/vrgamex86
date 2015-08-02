@@ -5784,7 +5784,7 @@ void CTFWarp(edict_t *ent)
 {
 	char text[1024];
 	char *mlist, *token;
-	static const char *seps = " \t\n\r";
+	static const char seps[] = " \t\n\r";
 
 	if (gi.argc() < 2) {
 		safe_cprintf(ent, PRINT_HIGH, "Where do you want to warp to?\n");
