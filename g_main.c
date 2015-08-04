@@ -243,6 +243,12 @@ EXPORT game_export_t *GetGameAPI (game_import_t *import)
 
 	globals.edict_size = sizeof(edict_t);
 
+    // initialize these so ShutdownGame doesn't crash
+    dedicated = gi.cvar ("dedicated", "0", CVAR_NOSET);
+    deathmatch = gi.cvar ("deathmatch", "0", CVAR_LATCH);
+    coop = gi.cvar ("coop", "0", CVAR_LATCH);
+    lazarus_pitch = gi.cvar("lazarus_pitch",   "0", 0);
+    
 	gl_driver = gi.cvar ("gl_driver", "", 0);
 	vid_ref = gi.cvar ("vid_ref", "", 0);
 	gl_driver_fog = gi.cvar ("gl_driver_fog", "opengl32", CVAR_NOSET | CVAR_ARCHIVE);

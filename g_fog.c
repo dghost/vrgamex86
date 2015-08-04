@@ -146,7 +146,7 @@ void Fog_Off()
         return;
     
     
-    if (!player_ent->client || player_ent->is_bot)
+    if (!g_edicts || !player_ent->client || player_ent->is_bot)
         return;
     
     gi.WriteByte (svc_fog); // svc_fog = 21
