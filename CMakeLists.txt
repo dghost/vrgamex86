@@ -122,7 +122,15 @@ set(GAME_HEADERS
 	tables/levelfields.h
 )
 
+# check 64 bit
+# this will break on non-x86 processors
+if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+	set( ARCH "x86" )
+else()
+	set(  ARCH "x64" )
+endif()
+
 # add_definitions(-DDISABLE_FOG)
-add_library(vrgamex86 MODULE ${GAME_SOURCES} ${GAME_HEADERS})
-set_target_properties(vrgamex86 PROPERTIES PREFIX "")
-target_compile_options(vrgamex86 PRIVATE -fvisibility=hidden)
+add_library(game MODULE ${GAME_SOURCES} ${GAME_HEADERS})
+set_target_properties(game PROPERTIES PREFIX "" OUTPUT_NAME "vrgame${ARCH}")
+target_compile_options(game PRIVATE -fvisibility=hidden)
