@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\qcommon\murmur3\murmur3.c" />
     <ClCompile Include="..\qcommon\shared\m_flash.c" />
     <ClCompile Include="..\qcommon\shared\q_shared.c" />
     <ClCompile Include="acesrc\acebot_ai.c" />
@@ -218,6 +219,7 @@
     <ClCompile Include="player\p_weapon.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\qcommon\murmur3\murmur3.h" />
     <ClInclude Include="..\qcommon\shared\q_shared.h" />
     <ClInclude Include="acesrc\acebot.h" />
     <ClInclude Include="g_ctf.h" />

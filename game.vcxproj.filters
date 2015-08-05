@@ -249,6 +249,9 @@
     <ClCompile Include="..\qcommon\shared\q_shared.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\qcommon\murmur3\murmur3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acesrc\acebot.h">
@@ -420,6 +423,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\qcommon\shared\q_shared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\qcommon\murmur3\murmur3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
