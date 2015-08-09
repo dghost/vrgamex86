@@ -133,4 +133,6 @@ endif()
 # add_definitions(-DDISABLE_FOG)
 add_library(game MODULE ${GAME_SOURCES} ${GAME_HEADERS})
 set_target_properties(game PROPERTIES PREFIX "" OUTPUT_NAME "vrgame${ARCH}")
+set_target_properties(game PROPERTIES XCODE_ATTRIBUTE_OTHER_CFLAGS[variant=Debug] "-D_DEBUG" )
+
 target_compile_options(game PRIVATE -fvisibility=hidden)
