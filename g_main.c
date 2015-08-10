@@ -101,7 +101,6 @@ cvar_t	*footstep_sounds;
 cvar_t	*fov;
 cvar_t	*gl_clear;
 cvar_t	*gl_driver;
-cvar_t	*gl_driver_fog;
 cvar_t	*hand;
 cvar_t	*jetpack_weenie;
 cvar_t	*joy_pitchsensitivity;
@@ -251,7 +250,6 @@ EXPORT game_export_t *GetGameAPI (game_import_t *import)
     
 	gl_driver = gi.cvar ("gl_driver", "", 0);
 	vid_ref = gi.cvar ("vid_ref", "", 0);
-	gl_driver_fog = gi.cvar ("gl_driver_fog", "opengl32", CVAR_NOSET | CVAR_ARCHIVE);
 
 	Fog_Init();
 
